@@ -4,9 +4,9 @@
 class Room
   attr_reader :id, :status
   
-  def initialize(id, status)
+  def initialize(id, status=:available)
     @id = id
-    @status = :available
+    @status = status
   end
   
 end

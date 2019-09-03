@@ -10,4 +10,8 @@ describe "Room_test#initialize" do
   it "Returns expected Room.id" do
     expect(r1.id).must_equal 1
   end
+  
+  it "Returns expected Room.status" do
+    expect(r1.status).must_equal :unavailable
+  end
 end
