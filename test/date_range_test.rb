@@ -5,7 +5,8 @@ describe "DateRange#initialize" do
   let(:d1) { DateRange.new("3rd Feb 2001","4th Feb 2001") }
   let(:d2) { DateRange.new("8th Dec 2019","20th Dec 2019") }
   let(:d3) { DateRange.new("Natalie","George") }
-  let(:d4) { DateRange.new("4th Feb 2001","3rd Feb 2001") }
+  let(:d4) { DateRange.new("4th Feb 2001","2nd Feb 2001") }
+  let(:d5) { DateRange.new("4th Feb 2001","4th Feb 2001") }
   
   it "When given a start and end date, returns an instance of DateRange" do
     expect(d1).must_be_instance_of DateRange
@@ -35,7 +36,8 @@ describe "DateRange#initialize" do
     expect{d4}.must_raise InvalidDateRangeError
   end
   
+  
   it "Raises a special error when invalid date range is provided (end_date is before start_date)" do
-    # it "Exception Raised when an invalid date range is provided" do 
+    expect{d5}.must_raise InvalidDateRangeError
   end
 end
