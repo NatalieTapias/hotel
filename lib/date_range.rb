@@ -1,6 +1,5 @@
 require "date"
 
-
 class DateRange
   attr_reader :start_date, :end_date
   
@@ -16,7 +15,6 @@ class DateRange
       raise InvalidDateRangeError.new("#{@start_date} is after #{@end_date}. Please provide a start date that is before the end date.")
     end
   end
-  
 end
 
 class InvalidDateRangeError < StandardError

@@ -36,7 +36,6 @@ describe "DateRange#initialize" do
     expect{d4}.must_raise InvalidDateRangeError
   end
   
-  
   it "Raises a special error when invalid date range is provided (end_date is before start_date)" do
     expect{d5}.must_raise InvalidDateRangeError
   end
