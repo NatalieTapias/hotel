@@ -4,6 +4,8 @@ require_relative "test_helper"
 describe "DateRange#initialize" do
   let(:d1) { DateRange.new("3rd Feb 2001","4th Feb 2001") }
   let(:d2) { DateRange.new("8th Dec 2019","20th Dec 2019") }
+  let(:d3) { DateRange.new("Natalie","George") }
+  let(:d4) { DateRange.new("4th Feb 2001","3rd Feb 2001") }
   
   it "When given a start and end date, returns an instance of DateRange" do
     expect(d1).must_be_instance_of DateRange
@@ -24,4 +26,16 @@ describe "DateRange#initialize" do
   it "Expects Successfully Parses Start Date String as instance of Date" do
     expect(d2.start_date).must_be_instance_of Date
   end
+  
+  it "Raises ArgumentError when arguments are not appropriately provided" do
+    expect{d3}.must_raise ArgumentError 
+  end
+  
+  # it "Raises a special error when invalid date range is provided (same date)" do
+  # #   expect{d4}.must_raise ArgumentError
+  # end
+  
+  # it "Raises a special error when invalid date range is provided (end_date is before start_date)" do
+  #   # it "Exception Raised when an invalid date range is provided" do 
+  # end
 end

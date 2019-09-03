@@ -5,19 +5,10 @@ class DateRange
   attr_reader :start_date, :end_date
   
   def initialize(start_date,end_date)
-    
-    
-    @start_date = Date.parse(start_date)
+    @start_date = Date.parse(start_date) 
     @end_date = Date.parse(end_date)
-  end
-  
-  def is_date?(start_date,end_date)
-    unless start_date.class Date
-      raise ArgumentError.new"It is not class Date. It is #{time}."
-    end
-    unless end_date.class Date
-      raise ArgumentError.new"It is not class Date. It is #{time}."
-    end
+    
+    # test how to compare dates  (have the end date after the first date in the test)
   end
   
 end
