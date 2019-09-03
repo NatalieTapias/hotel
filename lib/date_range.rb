@@ -22,7 +22,7 @@ class DateRange
   
 end
 
-
+# notes on Date.parse
 # d = Date.parse('3rd Feb 2001')
 #                              #=> #<Date: 2001-02-03 ...>
 # d.year                       #=> 2001
