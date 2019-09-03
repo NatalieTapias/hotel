@@ -8,9 +8,18 @@ class DateRange
     @start_date = Date.parse(start_date) 
     @end_date = Date.parse(end_date)
     
-    # test how to compare dates  (have the end date after the first date in the test)
+    if (@start_date <=> @end_date) == 0 
+      raise InvalidDateRangeError.new("Date range comparison is 0.")
+    end
+    
+    if (@start_date <=> @end_date) == 1
+      raise InvalidDateRangeError.new("Date range comparison is 1")
+    end
   end
   
+end
+
+class InvalidDateRangeError < StandardError
 end
 
 # notes on Date.parse

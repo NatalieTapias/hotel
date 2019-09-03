@@ -31,11 +31,11 @@ describe "DateRange#initialize" do
     expect{d3}.must_raise ArgumentError 
   end
   
-  # it "Raises a special error when invalid date range is provided (same date)" do
-  # #   expect{d4}.must_raise ArgumentError
-  # end
+  it "Raises a special error when invalid date range is provided (same date)" do
+    expect{d4}.must_raise InvalidDateRangeError
+  end
   
-  # it "Raises a special error when invalid date range is provided (end_date is before start_date)" do
-  #   # it "Exception Raised when an invalid date range is provided" do 
-  # end
+  it "Raises a special error when invalid date range is provided (end_date is before start_date)" do
+    # it "Exception Raised when an invalid date range is provided" do 
+  end
 end
