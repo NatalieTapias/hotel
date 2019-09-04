@@ -14,4 +14,15 @@ class Hotel
     end
   end
   
+  
+  # make a reservation 
+  # test for date range
+  def make_reservation(start_date, end_date)
+    date_range = DateRange.new(start_date, end_date)
+    room = @rooms.sample
+    reservation = Reservation.new(room, date_range)
+    @reservations << reservation
+    
+  end
+  
 end
