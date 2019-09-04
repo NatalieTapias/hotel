@@ -46,6 +46,11 @@ describe "DateRange" do
       expect{invalid_dates_start_before_end.length_of_stay}.must_raise ArgumentError
       expect{invalid_dates_start_equals_end.length_of_stay}.must_raise ArgumentError
     end 
+    
+    it "should return an integer" do
+      expect(valid_dates.length_of_stay).must_be_instance_of Integer
+      expect(valid_dates_long_range.length_of_stay).must_be_instance_of Integer
+    end 
   end
   
   describe "contains_date?" do

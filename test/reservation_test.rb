@@ -44,8 +44,8 @@ describe "Reservation" do
     end
     
     it "should return an integer" do
+      expect(booking_short_stay.length_of_stay).must_be_instance_of Integer
       expect(booking_long_stay.length_of_stay).must_be_instance_of Integer
     end
-    
   end
 end
