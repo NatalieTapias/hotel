@@ -19,7 +19,7 @@ class DateRange
   end
   
   def length_of_stay
-    return @end_date - @start_date 
+    return (@end_date - @start_date).to_i
   end
   
   def contains_date?(date)

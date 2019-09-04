@@ -10,7 +10,7 @@ describe "Room" do
   let(:room_id_too_low) { Room.new(-30, :unavailable) }
   
   describe "initialize" do
-    it "should return an instance of Room when valid id and valid status given" do
+    it "should create an instance of Room when valid id and valid status given" do
       expect(room_unavailable).must_be_instance_of Room
       expect(room_available).must_be_instance_of Room
       expect{room_invalid_id}.must_raise ArgumentError
