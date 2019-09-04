@@ -24,10 +24,7 @@ class Room
     elsif given_id > 20 || given_id < 1
       raise InvalidIDError
     end
-  end
-  
-  
-  
+  end 
 end
 
 

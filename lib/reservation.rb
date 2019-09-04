@@ -3,27 +3,18 @@ require_relative "date_range"
 
 
 class Reservation
-  attr_reader :id, :room, :date_range
+  attr_reader :room, :date_range
   
-  def initialize(id, room, date_range)
-    @id = id
+  def initialize(room, date_range)
     @room = room
     @date_range = date_range
   end
   
-  def validate_id(id)
-    if id.nil? || id <= 0
-      raise ArgumentError.new("The reservation ID must be non nil and greater than 0")
-    end
-  end
-  
   def cost
     return @date_range.length_of_stay * @room.cost
-    
-    # define these
   end
   
   def length_of_stay
-    
+    return @date_range.length_of_stay
   end
 end

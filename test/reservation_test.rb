@@ -2,33 +2,35 @@ require_relative "test_helper.rb"
 
 
 describe "Reservation class" do
-  a = Room.new(1, :available) 
-  b = DateRange.new("2nd Feb 2019", "4th Feb 2019")
-  let(:booking_1){Reservation.new(1, a, b)}
+  
+  room = Room.new(1, :available) 
+  short_range = DateRange.new("2nd Feb 2019", "4th Feb 2019")
+  long_range = DateRange.new("2nd Feb 2019", "20th Feb 2019")
+  let(:booking_short_stay){Reservation.new(room, short_range)}
+  let(:booking_long_stay){Reservation.new(room, long_range)}
   
   it "Makes an instance of reservation" do
-    expect(booking_1).must_be_instance_of Reservation
+    expect(booking_short_stay).must_be_instance_of Reservation
   end
   
   it "Returns accurate information about DateRange" do
-    expect(booking_1.date_range).must_be_instance_of DateRange
-    expect(booking_1.date_range).must_equal b
-    expect(booking_1.date_range.start_date.mon).must_equal 2
-    expect(booking_1.date_range.end_date.year).must_equal 2019
+    expect(booking_short_stay.date_range).must_be_instance_of DateRange
+    expect(booking_short_stay.date_range).must_equal short_range
   end
-  
   
   it "Returns accurate information about Room" do
-    expect(booking_1.room).must_be_instance_of Room
-    expect(booking_1.room).must_equal a
-    expect(booking_1.room.status).must_equal :available
-    expect(booking_1.room.id).must_equal 1
+    expect(booking_short_stay.room).must_be_instance_of Room
+    expect(booking_short_stay.room).must_equal room
   end
   
-  it "Raises an Error when a Room is not present" do
+  it "Returns expected cost" do
+    expect(booking_short_stay.cost).must_equal 400
+    expect(booking_long_stay.cost).must_equal 3600
   end
   
-  it "Raises an Error when a DateRange is not present" do
+  it "Returns the correct length of stay" do
+    expect(booking_long_stay.length_of_stay).must_equal long_range.length_of_stay
+    expect(booking_short_stay.length_of_stay).must_equal short_range.length_of_stay
   end
   
 end
