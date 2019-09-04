@@ -1,6 +1,6 @@
 require_relative "test_helper.rb"
 
-describe "Room_test#initialize" do
+describe "Room_test initialize" do
   let(:r1){ Room.new(1, :unavailable) }
   let(:r2){ Room.new(2) }
   let(:r3){ Room.new("hi") }
