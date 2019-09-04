@@ -45,4 +45,19 @@ describe "DateRange#initialize" do
     expect(d2.length_of_stay).must_equal 12
   end 
   
+  it "Should return true or false if date is within range" do
+    # the below are true
+    # first
+    expect(d2.contains_date?("8th Dec 2019")).must_equal true
+    # last
+    expect(d2.contains_date?("20th Dec 2019")).must_equal true
+    # middle
+    expect(d2.contains_date?("15th Dec 2019")).must_equal true
+    
+    # the below are false
+    # too far out 
+    expect(d2.contains_date?("30th Jan 2020")).must_equal false
+    # too far early
+    expect(d2.contains_date?("22nd May 2018")).must_equal false
+  end
 end
