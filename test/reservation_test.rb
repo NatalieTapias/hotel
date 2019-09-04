@@ -18,4 +18,11 @@ describe "Reservation class" do
   end
   
   
+  it "Returns accurate information about Room" do
+    expect(booking_1.room).must_be_instance_of Room
+    expect(booking_1.room).must_equal a
+    expect(booking_1.room.status).must_equal :available
+    expect(booking_1.room.id).must_equal 1
+  end
+  
 end
