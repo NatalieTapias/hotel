@@ -43,6 +43,25 @@ describe "Hotel Class" do
         hotel.make_reservation("5th Feb 2019", "3rd Feb 2019")
       }.must_raise InvalidDateRangeError
     end
+  end
+  
+  describe "reservations_list" do
+    date_in_range = "3rd Feb 2019"
+    date_out_of_range = "2nd Feb 2019"
+    
+    it "returns an array" do
+      # returns an empty array if no prior reservations loaded
+      expect(hotel.reservations_list(date_in_range).length).must_equal 0
+      
+      # one reservation made
+      hotel.make_reservation("3rd Feb 2019", "5th Feb 2019")
+      
+      # lookup a valid date and return an array with matching reservations
+      expect(hotel.reservations_list(date_in_range).length).must_equal 1
+      
+      # lookup an invalid date and return an array with matching reservation
+      expect(hotel.reservations_list(date_out_of_range).length).must_equal 0
+    end
     
   end
 end
