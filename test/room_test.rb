@@ -22,7 +22,7 @@ describe "Room" do
       expect(room_unavailable.id).must_equal 1
     end
     
-    it "Raises ArgumentError with any invalid :id provided" do
+    it "should raise ArgumentError when invalid :id provided" do
       expect{room_id_too_high}.must_raise ArgumentError
       expect{room_invalid_id}.must_raise ArgumentError
     end
