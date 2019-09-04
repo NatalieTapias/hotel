@@ -1,40 +1,48 @@
 require_relative "test_helper.rb"
 
-describe "Room_test initialize" do
-  let(:r1){ Room.new(1, :unavailable) }
-  let(:r2){ Room.new(2) }
-  let(:r3){ Room.new("hi") }
-  let(:r4){ Room.new(1, :hello) }
-  let(:r5){ Room.new("hi", :easy) }
-  let(:r6) { Room.new(30, :unavailable) }
+describe "Room" do
+  let(:room_unavailable){ Room.new(1, :unavailable) }
+  let(:room_available){ Room.new(2) }
+  let(:room_invalid_id){ Room.new("hi") }
+  let(:room_invalid_status){ Room.new(1, :hello) }
+  let(:room_invalid_id_and_status){ Room.new("hi", :easy) }
+  let(:room_id_too_high) { Room.new(30, :unavailable) }
   
-  it "When given an id and status, returns an instance of Room" do
-    expect(r1).must_be_instance_of Room
+  describe "initialize" do
+    it "should return an instance of Room when valid id and valid status given" do
+      expect(room_unavailable).must_be_instance_of Room
+      expect(room_available).must_be_instance_of Room
+    end
+  end 
+  
+  describe "room.id" do
+    it "should accurately return room ID" do
+      expect(room_unavailable.id).must_equal 1
+    end
+    
+    it "Raises InvalidIDError with any invalid ID provided" do
+      expect{room_id_too_high}.must_raise InvalidIDError
+    end
+    
+    it "Raises some kind of error if non-integer is provided as the ID" do
+      expect{room_invalid_id}.must_raise InvalidIDError
+    end
   end
   
-  it "Returns expected Room.id" do
-    expect(r1.id).must_equal 1
+  describe "room.status" do
+    it "Returns expected Room.status" do
+      expect(room_unavailable.status).must_equal :unavailable
+      expect(room_available.status).must_equal :available
+    end
+    
+    it "Raises InvalidStatusError with any invalid status" do
+      expect{room_invalid_status}.must_raise InvalidStatusError
+    end
   end
   
-  it "Returns expected Room.status" do
-    expect(r1.status).must_equal :unavailable
-    expect(r2.status).must_equal :available
+  describe "room.cost" do
+    it "should accurately return room.cost" do
+      expect(room_unavailable.cost).must_equal 200
+    end
   end
-  
-  it "Returns expected Room.cost" do
-    expect(r1.cost).must_equal 200
-  end
-  
-  it "Raises some kind of error if non-integer is provided as the ID" do
-    expect{r3}.must_raise InvalidIDError
-  end
-  
-  it "Raises InvalidStatusError with any invalid status" do
-    expect{r4}.must_raise InvalidStatusError
-  end
-  
-  it "Raises InvalidIDError with any invalid ID provided" do
-    expect{r6}.must_raise InvalidIDError
-  end
-  
 end
