@@ -15,6 +15,10 @@ class DateRange
       raise InvalidDateRangeError.new("#{@start_date} is after #{@end_date}. Please provide a start date that is before the end date.")
     end
   end
+  
+  def self.length_of_stay
+    return end_date - start_date 
+  end
 end
 
 class InvalidDateRangeError < StandardError
