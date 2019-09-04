@@ -15,32 +15,30 @@ describe "Room" do
     end
   end 
   
-  describe "room.id" do
+  describe "id" do
     it "should accurately return room ID" do
       expect(room_unavailable.id).must_equal 1
     end
     
-    it "Raises InvalidIDError with any invalid ID provided" do
-      expect{room_id_too_high}.must_raise InvalidIDError
+    it "Raises ArgumentError with any invalid ID provided" do
+      expect{room_id_too_high}.must_raise ArgumentError
+      expect{room_invalid_id}.must_raise ArgumentError
     end
     
-    it "Raises some kind of error if non-integer is provided as the ID" do
-      expect{room_invalid_id}.must_raise InvalidIDError
-    end
   end
   
-  describe "room.status" do
+  describe "status" do
     it "Returns expected Room.status" do
       expect(room_unavailable.status).must_equal :unavailable
       expect(room_available.status).must_equal :available
     end
     
     it "Raises InvalidStatusError with any invalid status" do
-      expect{room_invalid_status}.must_raise InvalidStatusError
+      expect{room_invalid_status}.must_raise ArgumentError
     end
   end
   
-  describe "room.cost" do
+  describe "cost" do
     it "should accurately return room.cost" do
       expect(room_unavailable.cost).must_equal 200
     end
