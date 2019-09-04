@@ -7,14 +7,14 @@ class DateRange
     @start_date = Date.parse(start_date) 
     @end_date = Date.parse(end_date)
     
-    # 0 means that @start_date is equal to @end_date
+    # evaluates to 0 if @start_date is equal to @end_date
     if (@start_date <=> @end_date) == 0 
-      raise InvalidDateRangeError.new("#{@start_date} is the same date as #{@end_date}. Please provide a start date that is before the end date.")
+      raise ArgumentError.new("#{@start_date} is the same date as #{@end_date}. Please provide a start date that is before the end date.")
     end
     
-    # 1 means that @start_date is greater than (after) @end_date
+    # evaluates to 1 if @start_date is after @end_date
     if (@start_date <=> @end_date) == 1
-      raise InvalidDateRangeError.new("#{@start_date} is after #{@end_date}. Please provide a start date that is before the end date.")
+      raise ArgumentError.new("#{@start_date} is after #{@end_date}. Please provide a start date that is before the end date.")
     end
   end
   
@@ -26,8 +26,4 @@ class DateRange
     parsed_date = Date.parse(date)
     return parsed_date >= @start_date && parsed_date <= @end_date
   end
-  
-end
-
-class InvalidDateRangeError < StandardError
 end

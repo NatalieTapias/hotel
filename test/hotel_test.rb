@@ -36,12 +36,12 @@ describe "Hotel Class" do
       # Same start_date and end_date
       expect{ 
         hotel.make_reservation("5th Feb 2019", "5th Feb 2019")
-      }.must_raise InvalidDateRangeError
+      }.must_raise ArgumentError
       
       # start_date before end_date
       expect{ 
         hotel.make_reservation("5th Feb 2019", "3rd Feb 2019")
-      }.must_raise InvalidDateRangeError
+      }.must_raise ArgumentError
     end
   end
   
