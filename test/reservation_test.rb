@@ -31,9 +31,14 @@ describe "Reservation" do
   end
   
   describe "cost" do
-    it "Returns expected cost" do
+    it "should return expected cost" do
       expect(booking_short_stay.cost).must_equal 400
       expect(booking_long_stay.cost).must_equal 3600
+    end
+    
+    it "should be a float" do
+      expect(booking_long_stay.cost).must_be_instance_of Float
+      
     end
   end
   

@@ -17,4 +17,5 @@ class Reservation
   def length_of_stay
     return @date_range.length_of_stay
   end
+  
 end

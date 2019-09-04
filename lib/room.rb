@@ -9,7 +9,7 @@ class Room
     incorrect_id?(id)
     @id = id
     @status = status
-    @cost = 200
+    @cost = 200.00
   end
   
   def incorrect_status?(given_status)
