@@ -39,4 +39,10 @@ describe "DateRange#initialize" do
   it "Raises a special error when invalid date range is provided (end_date is before start_date)" do
     expect{d5}.must_raise InvalidDateRangeError
   end
+  
+  it "Accurately calculates length_of_stay" do
+    expect(d1.length_of_stay).must_equal 1
+    expect(d2.length_of_stay).must_equal 12
+  end 
+  
 end

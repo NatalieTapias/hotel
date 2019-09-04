@@ -16,4 +16,14 @@ class Reservation
       raise ArgumentError.new("The reservation ID must be non nil and greater than 0")
     end
   end
+  
+  def cost
+    return @date_range.length_of_stay * @room.cost
+    
+    # define these
+  end
+  
+  def length_of_stay
+    
+  end
 end

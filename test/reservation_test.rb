@@ -25,4 +25,10 @@ describe "Reservation class" do
     expect(booking_1.room.id).must_equal 1
   end
   
+  it "Raises an Error when a Room is not present" do
+  end
+  
+  it "Raises an Error when a DateRange is not present" do
+  end
+  
 end
