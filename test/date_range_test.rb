@@ -50,17 +50,16 @@ describe "DateRange" do
   
   describe "contains_date?" do
     it "should accurately respond to contains_date?" do
-      # first day
+      # date within range - first
       expect(valid_dates_long_range.contains_date?("8th Dec 2019")).must_equal true
-      # last last day
+      # date within range - last
       expect(valid_dates_long_range.contains_date?("20th Dec 2019")).must_equal true
-      # middle day
+      # date within range - middle
       expect(valid_dates_long_range.contains_date?("15th Dec 2019")).must_equal true
       
-      # the below are false
-      # too far out day
+      # date out of range - after
       expect(valid_dates_long_range.contains_date?("30th Jan 2020")).must_equal false
-      # too early day
+      # date out of range - before
       expect(valid_dates_long_range.contains_date?("22nd May 2018")).must_equal false
     end
   end
