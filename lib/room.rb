@@ -2,13 +2,14 @@ require_relative "date_range"
 
 
 class Room
-  attr_reader :id, :status
+  attr_reader :id, :status, :cost
   
   def initialize(id, status=:available)
     incorrect_status?(status)
     incorrect_id?(id)
     @id = id
     @status = status
+    @cost = 200
   end
   
   def incorrect_status?(given_status)
@@ -24,7 +25,12 @@ class Room
       raise InvalidIDError
     end
   end
+  
+  
+  
 end
+
+
 class InvalidStatusError < StandardError
 end
 

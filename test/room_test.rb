@@ -21,6 +21,10 @@ describe "Room_test#initialize" do
     expect(r2.status).must_equal :available
   end
   
+  it "Returns expected Room.cost" do
+    expect(r1.cost).must_equal 200
+  end
+  
   it "Raises some kind of error if non-integer is provided as the ID" do
     expect{r3}.must_raise InvalidIDError
   end
@@ -32,4 +36,5 @@ describe "Room_test#initialize" do
   it "Raises InvalidIDError with any invalid ID provided" do
     expect{r6}.must_raise InvalidIDError
   end
+  
 end
