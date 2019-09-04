@@ -9,4 +9,13 @@ describe "Reservation class" do
   it "Makes an instance of reservation" do
     expect(booking_1).must_be_instance_of Reservation
   end
+  
+  it "Returns accurate information about DateRange" do
+    expect(booking_1.date_range).must_be_instance_of DateRange
+    expect(booking_1.date_range).must_equal b
+    expect(booking_1.date_range.start_date.mon).must_equal 2
+    expect(booking_1.date_range.end_date.year).must_equal 2019
+  end
+  
+  
 end

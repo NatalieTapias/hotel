@@ -3,12 +3,12 @@ require_relative "date_range"
 
 
 class Reservation
-  attr_reader :id
+  attr_reader :id, :room, :date_range
   
-  def initialize(id, room, date)
+  def initialize(id, room, date_range)
     @id = id
     @room = room
-    @date = date
+    @date_range = date_range
   end
   
   def validate_id(id)
