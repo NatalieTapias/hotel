@@ -1,5 +1,5 @@
-coverage
-notes
+
+notes.txt
 *.gem
 *.rbc
 /.config
