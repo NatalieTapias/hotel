@@ -40,6 +40,7 @@ class Hotel
       unavailable_rooms.push(reservation.room)
     end
     
+    
     unavailable_rooms.each do |room|
       rooms.delete(room)
     end
