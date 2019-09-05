@@ -79,7 +79,7 @@ describe "Hotel" do
       expect(a_hotel.available_room_list("2nd Dec 2019", "4th Dec 2019").length).must_equal 20
       a_hotel.make_reservation("5th January 2018", "10th January 2018")
       # this is a case where the last day of the range provided to available_room_list overlaps with an existing reservation
-      expect(a_hotel.available_room_list("4th January 2018", "7th January 2018").length).must_equal 19
+      expect(a_hotel.available_room_list("4th January 2018", "5th January 2018").length).must_equal 19
       
     end
   end

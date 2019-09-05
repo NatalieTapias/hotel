@@ -33,13 +33,19 @@ class Hotel
   end
   
   # I can view a list of rooms that are not reserved for a given date range, so that I can see all available rooms for that day
+  # As of now, this method only checks the start date
+  # do I need to think about the union of data sets?
   def available_room_list(start_date, end_date)
     unavailable_rooms = []
-    reservations = reservations_list(start_date)
-    reservations.each do |reservation|
-      unavailable_rooms.push(reservation.room)
+    early_reservations = reservations_list(start_date)
+    early_reservations.each do |a_reservation|
+      unavailable_rooms.push(a_reservation.room)
     end
-    
+    # the goal here is to grab a list of reservations for the end date
+    late_reservations = reservations_list(end_date)
+    late_reservations.each do |a_reservation|
+      unavailable_rooms.push(a_reservation.room)
+    end
     
     unavailable_rooms.each do |room|
       rooms.delete(room)
