@@ -3,7 +3,6 @@ require_relative "room"
 require_relative "date_range"
 
 class Hotel
-  
   attr_reader :reservations, :rooms
   
   def initialize
@@ -29,7 +28,6 @@ class Hotel
         reservations_list << reservation
       end
     end
-    
     return reservations_list
   end
 end

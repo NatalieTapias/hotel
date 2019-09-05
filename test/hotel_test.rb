@@ -43,6 +43,10 @@ describe "Hotel Class" do
         hotel.make_reservation("5th Feb 2019", "3rd Feb 2019")
       }.must_raise ArgumentError
     end
+    
+    it "should only reserve available rooms" do
+      
+    end
   end
   
   describe "reservations_list" do

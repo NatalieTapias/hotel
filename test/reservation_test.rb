@@ -38,7 +38,7 @@ describe "Reservation" do
     
     it "should be a float" do
       expect(booking_long_stay.cost).must_be_instance_of Float
-      
+      expect(booking_short_stay.cost).must_be_instance_of Float 
     end
   end
   
