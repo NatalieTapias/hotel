@@ -13,9 +13,7 @@ describe "Room" do
       expect(room).must_be_instance_of Room
       expect{room_invalid_id}.must_raise ArgumentError
     end
-  end 
-  
-  describe "id" do
+    
     it "should accurately return :id" do
       expect(room.id).must_equal 2
     end
@@ -23,8 +21,13 @@ describe "Room" do
     it "should raise ArgumentError when invalid :id provided" do
       expect{room_id_too_high}.must_raise ArgumentError
       expect{room_invalid_id}.must_raise ArgumentError
+      expect{room_id_too_low}.must_raise ArgumentError
     end
     
+    it "should start with reservation_list as an empty array" do
+      expect(room.reservation_list).must_be_empty
+      expect(room.reservation_list).must_be_instance_of Array
+    end
   end
   
   describe "cost" do
@@ -37,12 +40,12 @@ describe "Room" do
     date_range = DateRange.new("3rd Feb 2001", "4th Feb 2001")
     let(:room_short_stay){Room.new(3)}
     
-    
-    it "should return an array" do
+    it "should return an array of DateRange instances" do
       
-      expect(room_short_stay.reservation_list).must_be_empty
-      
-      # expect(room_short_stay.reservation_list).must_be_instance_of Array
+      expect(room_short_stay.reservation_list).must_be_instance_of Array
+      room_short_stay.make_reservation(date_range)
+      expect(room_short_stay.reservation_list.length).must_equal 1
+      expect(room_short_stay.reservation_list.first).must_be_instance_of DateRange
     end
     #   room = Room.new(1) 
     #   short_range = DateRange.new("2nd Feb 2019", "4th Feb 2019")

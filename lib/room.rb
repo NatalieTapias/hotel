@@ -20,7 +20,7 @@ class Room
   end 
   
   def make_reservation(date_range)
-    @reservation_list << date_range
+    reservation_list.push(date_range) 
   end
   
 end
