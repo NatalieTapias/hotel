@@ -35,6 +35,11 @@ class Hotel
   # I can view a list of rooms that are not reserved for a given date range, so that I can see all available rooms for that day
   # As of now, this method only checks the start date
   # do I need to think about the union of data sets?
+  
+  #(!) start here: here's a new thought- create a method that makes an array of date objects between start and end dates
+  # then take the above array for this calculation- available room list. iterate through the date range and lookup a list of unavailable rooms
+  # only add if unique room 
+  # delete from the known room list 
   def available_room_list(start_date, end_date)
     unavailable_rooms = []
     early_reservations = reservations_list(start_date)

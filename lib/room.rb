@@ -17,4 +17,6 @@ class Room
       raise ArgumentError.new("#{given_id} is out of range. It needs to be between 1-12.")
     end
   end 
+
+  
 end

@@ -22,8 +22,13 @@ class DateRange
     return (@end_date - @start_date).to_i
   end
   
+  # (!) add in a date range 
   def contains_date?(date)
     parsed_date = Date.parse(date)
     return parsed_date >= @start_date && parsed_date <= @end_date
   end
+  
+  def self.date_range_array
+  end
+  
 end
