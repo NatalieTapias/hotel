@@ -8,6 +8,7 @@ class Room
     incorrect_id?(id)
     @id = id
     @cost = 200.00
+    @reservations = []
   end
   
   def incorrect_id?(given_id)
@@ -17,6 +18,6 @@ class Room
       raise ArgumentError.new("#{given_id} is out of range. It needs to be between 1-12.")
     end
   end 
-
+  
   
 end

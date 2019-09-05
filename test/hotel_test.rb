@@ -5,12 +5,12 @@ describe "Hotel" do
   let(:a_hotel){Hotel.new}
   
   describe "initialize" do
-    it "should have no reservations" do
+    it "should initially return an empty array for reservations" do
       expect(a_hotel.reservations).must_be_instance_of Array
       expect(a_hotel.reservations.length).must_equal 0
     end    
     
-    it "should have an array of 20 Rooms" do
+    it "should initially have an array of 20 Rooms" do
       expect(a_hotel.rooms).must_be_instance_of Array
       expect(a_hotel.rooms.length).must_equal 20
       expect(a_hotel.rooms.first.id).must_equal 1
@@ -76,6 +76,7 @@ describe "Hotel" do
     end
     
     it "should return expected available rooms" do
+      
       expect(a_hotel.available_room_list("2nd Dec 2019", "4th Dec 2019").length).must_equal 20
       a_hotel.make_reservation("5th January 2018", "10th January 2018")
       # this is a case where the last day of the range provided to available_room_list overlaps with an existing reservation
