@@ -4,6 +4,8 @@ require_relative "../lib/date_range.rb"
 describe "Room" do
   
   let(:room){ Room.new(2) }
+  let(:room_high_id) { Room.new(20) }
+  let(:room_id_zero) { Room.new(0) }
   let(:room_invalid_id){ Room.new("hi") }
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
@@ -11,11 +13,15 @@ describe "Room" do
   describe "initialize" do
     it "should create an instance of Room" do
       expect(room).must_be_instance_of Room
-      expect{room_invalid_id}.must_raise ArgumentError
+      expect(room_high_id).must_be_instance_of Room
+      expect{room_id_zero}.must_raise ArgumentError
+      expect{room_id_too_high}.must_raise ArgumentError
+      expect{room_invalid_id}.wont_be_instance_of Room
     end
     
     it "should accurately return :id" do
       expect(room.id).must_equal 2
+      expect(room_high_id.id).must_equal 20      
     end
     
     it "should raise ArgumentError when invalid :id provided" do
