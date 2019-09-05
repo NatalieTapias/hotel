@@ -30,15 +30,18 @@ describe "Room" do
       expect{room_id_too_low}.must_raise ArgumentError
     end
     
-    it "should start with reservation_list as an empty array" do
+    it "should initialize with an empty #reservation_list Array" do
       expect(room.reservation_list).must_be_empty
       expect(room.reservation_list).must_be_instance_of Array
+      expect(room_high_id.reservation_list).must_be_empty
+      expect(room_high_id.reservation_list).must_be_instance_of Array
     end
   end
   
   describe "cost" do
     it "should accurately return :cost" do
       expect(room.cost).must_equal 200
+      expect(room_high_id.cost).must_equal 200
     end
   end
   
