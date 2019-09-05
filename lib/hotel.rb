@@ -13,6 +13,7 @@ class Hotel
     end
   end
   
+  # accept DateRange object rather than start and end date
   def make_reservation(start_date, end_date)
     date_range = DateRange.new(start_date, end_date)
     room = @rooms.sample
@@ -30,4 +31,22 @@ class Hotel
     end
     return reservations_list
   end
+  
+  # I can view a list of rooms that are not reserved for a given date range, so that I can see all available rooms for that day
+  def available_room_list(start_date, end_date)
+    unavailable_rooms = []
+    reservations = reservations_list(start_date)
+    reservations.each do |reservation|
+      unavailable_rooms.push(reservation.room)
+    end
+    
+    unavailable_rooms.each do |room|
+      rooms.delete(room)
+    end
+    return rooms
+  end
+  # I can get a reservation of a room for a given date range, and that room will not be part of any other reservation overlapping that date range
+  # I want an exception raised if I try to reserve a room during a date range when all rooms are reserved, 
+  # so that I cannot make two reservations for the same room that overlap by date
+  
 end
