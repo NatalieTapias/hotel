@@ -46,15 +46,24 @@ describe "Room" do
   end
   
   describe "make-reservation" do
-    date_range = DateRange.new("3rd Feb 2001", "4th Feb 2001")
-    let(:room_short_stay){Room.new(3)}
+    short_date_range = DateRange.new("3rd Feb 2001", "4th Feb 2001")
+    long_date_range = DateRange.new("5th Dec 2009", "15th Jan 2010")
+    
     
     it "should return an array of DateRange instances" do
+      expect(room.reservation_list).must_be_instance_of Array
       
-      expect(room_short_stay.reservation_list).must_be_instance_of Array
-      room_short_stay.make_reservation(date_range)
-      expect(room_short_stay.reservation_list.length).must_equal 1
-      expect(room_short_stay.reservation_list.first).must_be_instance_of DateRange
+      # make a reservation
+      room.make_reservation(short_date_range)
+      expect(room.reservation_list.length).must_equal 1
+      expect(room.reservation_list.first).must_be_instance_of DateRange
+      
+      # make a secod reservation for the same room
+      room.make_reservation(long_date_range)
+      expect(room.reservation_list.length).must_equal 2
+      expect(room.reservation_list.last).must_be_instance_of DateRange
+      
+      
     end
     #   room = Room.new(1) 
     #   short_range = DateRange.new("2nd Feb 2019", "4th Feb 2019")
