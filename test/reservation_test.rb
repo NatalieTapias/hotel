@@ -3,7 +3,7 @@ require_relative "test_helper.rb"
 
 describe "Reservation" do
   
-  room = Room.new(1, :available) 
+  room = Room.new(1) 
   short_range = DateRange.new("2nd Feb 2019", "4th Feb 2019")
   long_range = DateRange.new("2nd Feb 2019", "20th Feb 2019")
   let(:booking_short_stay){Reservation.new(room, short_range)}
