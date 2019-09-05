@@ -2,13 +2,13 @@ require_relative "date_range"
 
 
 class Room
-  attr_reader :id, :cost
+  attr_reader :id, :cost, :reservation_list
   
   def initialize(id)
     incorrect_id?(id)
     @id = id
     @cost = 200.00
-    @reservations = []
+    @reservation_list = []
   end
   
   def incorrect_id?(given_id)
@@ -19,5 +19,8 @@ class Room
     end
   end 
   
+  def make_reservation(date_range)
+    @reservation_list << date_range
+  end
   
 end

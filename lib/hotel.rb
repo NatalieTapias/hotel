@@ -1,64 +1,33 @@
-require_relative "reservation"
 require_relative "room"
 require_relative "date_range"
 
 class Hotel
-  attr_reader :reservations, :rooms
+  attr_reader :rooms
   
   def initialize
-    # @reservations = []
     @rooms = []
     20.times do |i|
       rooms << Room.new(i + 1)
     end
   end
   
-  # accept DateRange object rather than start and end date
-  # I'd like to move this over to rooms
-  # def make_reservation(start_date, end_date)
-  #   date_range = DateRange.new(start_date, end_date)
-  #   room = @rooms.sample
-  #   reservation = Reservation.new(room, date_range)
-  #   @reservations << reservation
-  # end
-  
-  # I can access the list of reservations for a specific date, so that I can track reservations by date
-  # this will need to change to reflect the new structure
-  # def reservations_list(date)
-  #   reservations_list = []
-  #   @reservations.each do |reservation|
-  #     if reservation.date_range.contains_date?(date)
-  #       reservations_list << reservation
-  #     end
+  # def available_room_list(start_date, end_date)
+  #   unavailable_rooms = []
+  #   early_reservations = reservations_list(start_date)
+  #   early_reservations.each do |a_reservation|
+  #     unavailable_rooms.push(a_reservation.room)
   #   end
-  #   return reservations_list
+  #   # the goal here is to grab a list of reservations for the end date
+  #   late_reservations = reservations_list(end_date)
+  #   late_reservations.each do |a_reservation|
+  #     unavailable_rooms.push(a_reservation.room)
+  #   end
+  
+  #   unavailable_rooms.each do |room|
+  #     rooms.delete(room)
+  #   end
+  #   return rooms
   # end
-  
-  # I can view a list of rooms that are not reserved for a given date range, so that I can see all available rooms for that day
-  # As of now, this method only checks the start date
-  # do I need to think about the union of data sets?
-  
-  #(!) start here: here's a new thought- create a method that makes an array of date objects between start and end dates
-  # then take the above array for this calculation- available room list. iterate through the date range and lookup a list of unavailable rooms
-  # only add if unique room 
-  # delete from the known room list 
-  def available_room_list(start_date, end_date)
-    unavailable_rooms = []
-    early_reservations = reservations_list(start_date)
-    early_reservations.each do |a_reservation|
-      unavailable_rooms.push(a_reservation.room)
-    end
-    # the goal here is to grab a list of reservations for the end date
-    late_reservations = reservations_list(end_date)
-    late_reservations.each do |a_reservation|
-      unavailable_rooms.push(a_reservation.room)
-    end
-    
-    unavailable_rooms.each do |room|
-      rooms.delete(room)
-    end
-    return rooms
-  end
   # I can get a reservation of a room for a given date range, and that room will not be part of any other reservation overlapping that date range
   # I want an exception raised if I try to reserve a room during a date range when all rooms are reserved, 
   # so that I cannot make two reservations for the same room that overlap by date
