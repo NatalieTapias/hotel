@@ -48,8 +48,8 @@ describe "Hotel" do
       a_hotel.rooms[2].make_reservation(date_range)
       # a_date = Date.new(2012,01,02)
       
-      expect(a_hotel.list_of_available_rooms(date_range)).must_be_instance_of Array
-      expect(a_hotel.list_of_available_rooms(date_range).first).must_be_instance_of Room
+      # expect(a_hotel.list_of_available_rooms(date_range)).must_be_instance_of Array
+      # expect(a_hotel.list_of_available_rooms(date_range).first).must_be_instance_of Room
       # expect(a_hotel.list_of_available_rooms(date_range).first.id).must_equal 1
       # expect(a_hotel.list_of_available_rooms(date_range).length).must_equal 3
       

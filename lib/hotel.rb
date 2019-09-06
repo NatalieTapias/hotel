@@ -23,6 +23,8 @@ class Hotel
     return reserved_rooms
   end
   
+  #(! start here)
+  
   def list_of_available_rooms(date_range)
     unavailable_rooms = []
     @rooms.each do |room|

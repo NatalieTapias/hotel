@@ -30,20 +30,47 @@ class Room
     end
   end
   
-  def date_range_overlaps?(existing_date_range, proposed_date_range)
-    if existing_date_range.start_date <= proposed_date_range.start_date && existing_date_range.end_date >= proposed_date_range.end_date
-      return false
-    elsif existing_date_range.start_date == proposed_date_range.end_date || existing_date_range.end_date == proposed_date_range.start_date 
+  def date_range_overlaps?(reservation, new_reservation)
+    # true = there is overlap
+    # false = there is no overlap (it's good! make a reservation!)
+    
+    if reservation.start_date <= new_reservation.end_date && reservation.end_date <= new_reservation.end_date
       return true
-    elsif existing_date_range.start_date >= proposed_date_range.end_date || existing_date_range.end_date <= proposed_date_range.start_date 
+    elsif new_reservation.start_date <= reservation.start_date && new_reservation.end_date >= reservation.end_date
       return true
-    elsif existing_date_range.start_date <= proposed_date_range.start_date  && existing_date_range.end_date >= proposed_date_range.start_date 
+    elsif new_reservation.start_date <= reservation.start_date && new_reservation.end_date >= reservation.end_date
+      return true
+    elsif new_reservation.start_date <= reservation.start_date && new_reservation.end_date >= reservation.end_date
+      return true
+    elsif reservation.start_date == new_reservation.end_date || reservation.end_date == new_reservation.start_date
       return false
-    elsif existing_date_range.end_date >= proposed_date_range.end_date  && existing_date_range.start_date <= proposed_date_range.end_date 
-      return false
-    elsif existing_date_range.start_date > proposed_date_range.start_date && existing_date_range.end_date <= proposed_date_range.end_date
+    else 
       return false
     end
+    
+    
+    
+    
+    # this returns true if proposed_date_range is encapsulated by existing_date_range
+    # if existing_date_range.start_date < proposed_date_range.start_date && existing_date_range.end_date > proposed_date_range.end_date
+    #   return true
+    
+    # elsif existing_date_range.start_date == proposed_date_range.end_date || existing_date_range.end_date == proposed_date_range.start_date 
+    #   return false
+    
+    # elsif existing_date_range.start_date >= proposed_date_range.end_date || existing_date_range.end_date <= proposed_date_range.start_date 
+    #   return false
+    
+    # elsif existing_date_range.start_date <= proposed_date_range.start_date  && existing_date_range.end_date >= proposed_date_range.start_date 
+    #   return false
+    
+    # elsif existing_date_range.end_date >= proposed_date_range.end_date  && existing_date_range.start_date <= proposed_date_range.end_date 
+    #   return false
+    
+    
+    # elsif existing_date_range.start_date > proposed_date_range.start_date && existing_date_range.end_date <= proposed_date_range.end_date
+    #   return false
+    # end
   end
   
   def total_cost(date_range)
