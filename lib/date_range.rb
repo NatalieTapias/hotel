@@ -21,4 +21,6 @@ class DateRange
   def contains_date?(date)
     return date >= @start_date && date <= @end_date
   end
+  
+ 
 end

@@ -19,16 +19,29 @@ class Room
     end
   end 
   
+  # I'm going to need to run the test (is there overlap?)
   def make_reservation(date_range)
     @reservation_list.push(date_range) 
   end
   
-  # this is a method to test if a room is available on a particular date
-  def room_available_on_date?(particular_date)
-    @reservation_list.each do |reservation|
-      if reservation.contains_date?(particular_date)
-        return room
-      end
+  # do I want this here or in hotel??
+  def date_range_overlaps?(existing_date_range, proposed_date_range)
+    if existing_date_range.start_date <= proposed_date_range.start_date && existing_date_range.end_date >= proposed_date_range.end_date
+      return false
+    elsif existing_date_range.start_date > proposed_date_range.end_date || existing_date_range.end_date < proposed_date_range.start_date
+      return true
     end
+    
+    return true
+    
   end
 end
+
+# # this is a method to test if a room is available on a particular date
+# def room_available_on_date?(particular_date)
+#   @reservation_list.each do |reservation|
+#     if reservation.contains_date?(particular_date)
+#       return room
+#     end
+#   end
+# end

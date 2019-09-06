@@ -10,6 +10,9 @@ describe "Room" do
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
   let(:short_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) }
+  let(:intersecting_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) } 
+  let(:edge_date_range_check_in_when_other_check_out){ DateRange.new(Date.new(2001,02,04), Date.new(2001,02,05))}
+  let(:edge_date_range_check_out_when_other_check_in){ DateRange.new(Date.new(2001,02,01), Date.new(2001,02,03))}
   let(:long_date_range) { DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
   let(:room_with_reservation) { Room.new(2) }
   
@@ -73,12 +76,22 @@ describe "Room" do
     end
   end
   
-  # describe "room_available_on_date?" do
-  #   it "returns an array of available Rooms" do
-  #     room_with_reservation.make_reservation(short_date_range)
-  #     expect(room_with_reservation.reservation_list).must_be_instance_of Array
-  #     expect(room_with_reservation.room_available_on_date?(particular_date_out_of_short_range)).must_be_instance_of Room #room
-  #   end
-  # end
+  describe "date_range_overlaps?" do
+    it "should return false when two date ranges overlap" do
+      expect(room.date_range_overlaps?(short_date_range,intersecting_date_range)).must_equal false
+    end
+    it "should return true when checkin/checkout dates overlap" do
+      expect(room.date_range_overlaps?(short_date_range,edge_date_range_check_in_when_other_check_out)).must_equal true
+      expect(room.date_range_overlaps?(short_date_range,edge_date_range_check_out_when_other_check_in)).must_equal true
+    end
+  end
   
 end
+
+# describe "room_available_on_date?" do
+#   it "returns an array of available Rooms" do
+#     room_with_reservation.make_reservation(short_date_range)
+#     expect(room_with_reservation.reservation_list).must_be_instance_of Array
+#     expect(room_with_reservation.room_available_on_date?(particular_date_out_of_short_range)).must_be_instance_of Room #room
+#   end
+# end
