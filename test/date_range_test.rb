@@ -22,8 +22,8 @@ describe "DateRange" do
     it "should accurately return instance of Date with .start_date" do
       expect(valid_dates.start_date).must_be_instance_of Date
       expect(valid_dates_long_range.start_date).must_be_instance_of Date
-      # expect(valid_dates.start_date.year).must_equal 2001
-      # expect(valid_dates.start_date.mon).must_equal 2
+      expect(valid_dates.start_date.year).must_equal 2001
+      expect(valid_dates.start_date.mon).must_equal 2
       expect(valid_dates_long_range.start_date.strftime('%d %b %Y')).must_equal "08 Dec 2019" 
     end
     
