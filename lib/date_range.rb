@@ -22,5 +22,5 @@ class DateRange
     return date >= @start_date && date <= @end_date
   end
   
- 
+  
 end

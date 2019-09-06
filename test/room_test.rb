@@ -86,6 +86,16 @@ describe "Room" do
       expect(room_high_id.reservation_exists?(in_range_date)).must_equal true
       expect(room_high_id.reservation_exists?(out_of_range_date)).must_equal false
     end
+    
+    it "should return true when a date is passed within the reservation range" do
+      # make two reservations, first will have a match, second will not have a match
+      in_range_date = Date.new(2009,12,05)
+      out_of_range_date = Date.new(2009,12,01)
+      room_high_id.make_reservation(long_date_range)
+      room_high_id.make_reservation(short_date_range)
+      expect(room_high_id.reservation_exists?(in_range_date)).must_equal true
+      expect(room_high_id.reservation_exists?(out_of_range_date)).must_equal false
+    end
   end
   
   

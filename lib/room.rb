@@ -21,8 +21,6 @@ class Room
   
   # I'm going to need to run the test (is there overlap?)
   def make_reservation(proposed_date_range)
-    # reservation_list.each do |existing_date_range|
-    # date_range_overlaps?(existing_date_range, proposed_date_range)
     @reservation_list.push(proposed_date_range) 
   end
   
