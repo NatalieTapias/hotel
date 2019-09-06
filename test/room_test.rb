@@ -10,7 +10,8 @@ describe "Room" do
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
   let(:short_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) }
-  let(:intersecting_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) } 
+  let(:short_date_range_copy) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) } 
+  let(:earlier_date_range) { DateRange.new(Date.new(1999,02,03), Date.new(1999,02,04)) }
   let(:edge_date_range_check_in_when_other_check_out){ DateRange.new(Date.new(2001,02,04), Date.new(2001,02,05))}
   let(:edge_date_range_check_out_when_other_check_in){ DateRange.new(Date.new(2001,02,01), Date.new(2001,02,03))}
   let(:long_date_range) { DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
@@ -78,11 +79,16 @@ describe "Room" do
   
   describe "date_range_overlaps?" do
     it "should return false when two date ranges overlap" do
-      expect(room.date_range_overlaps?(short_date_range,intersecting_date_range)).must_equal false
+      expect(room.date_range_overlaps?(short_date_range,short_date_range_copy)).must_equal false
     end
-    it "should return true when checkin/checkout dates overlap" do
+    it "should return true for when start/end dates overlap from two date ranges (can check in on the date that a check-out occurs for a room)" do
       expect(room.date_range_overlaps?(short_date_range,edge_date_range_check_in_when_other_check_out)).must_equal true
       expect(room.date_range_overlaps?(short_date_range,edge_date_range_check_out_when_other_check_in)).must_equal true
+    end
+    # when date ranges are not intersecting, and occur either before or after existing date range
+    it "should return true for proposed date ranges that are significantly before/significantly after existing date range" do
+      expect(room.date_range_overlaps?(short_date_range,long_date_range)).must_equal true
+      expect(room.date_range_overlaps?(short_date_range,earlier_date_range)).must_equal true
     end
   end
   
