@@ -20,7 +20,15 @@ class Room
   end 
   
   def make_reservation(date_range)
-    reservation_list.push(date_range) 
+    @reservation_list.push(date_range) 
   end
   
+  # this is a method to test if a room is available on a particular date
+  def room_available_on_date?(particular_date)
+    @reservation_list.each do |reservation|
+      if reservation.contains_date?(particular_date)
+        return room
+      end
+    end
+  end
 end

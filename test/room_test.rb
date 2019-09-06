@@ -9,6 +9,12 @@ describe "Room" do
   let(:room_invalid_id){ Room.new("hi") }
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
+  let(:short_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) }
+  let(:long_date_range) { DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
+  let(:room_with_reservation) { Room.new(2) }
+  
+  let(:particular_date_within_short_range){ Date.new(2001,02,03) }
+  let(:particular_date_out_of_short_range) { Date.new(2001,02,01) }
   
   describe "initialize" do
     it "should create an instance of Room" do
@@ -46,9 +52,6 @@ describe "Room" do
   end
   
   describe "make-reservation" do
-    short_date_range = DateRange.new("3rd Feb 2001", "4th Feb 2001")
-    long_date_range = DateRange.new("5th Dec 2009", "15th Jan 2010")
-    
     it "should accurately return an array of DateRange instances once a reservation is made" do
       expect(room.reservation_list).must_be_instance_of Array
       
@@ -69,4 +72,13 @@ describe "Room" do
       expect(room_high_id.reservation_list.last).must_be_instance_of DateRange
     end
   end
+  
+  # describe "room_available_on_date?" do
+  #   it "returns an array of available Rooms" do
+  #     room_with_reservation.make_reservation(short_date_range)
+  #     expect(room_with_reservation.reservation_list).must_be_instance_of Array
+  #     expect(room_with_reservation.room_available_on_date?(particular_date_out_of_short_range)).must_be_instance_of Room #room
+  #   end
+  # end
+  
 end

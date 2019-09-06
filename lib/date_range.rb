@@ -3,19 +3,19 @@ require "date"
 class DateRange
   attr_reader :start_date, :end_date
   
+  # make date object in test 
   def initialize(start_date,end_date)
-    @start_date = Date.parse(start_date) 
-    @end_date = Date.parse(end_date)
+    @start_date = start_date
+    @end_date = end_date
     
-    # evaluates to 0 if @start_date is equal to @end_date
-    if (@start_date <=> @end_date) == 0 
-      raise ArgumentError.new("#{@start_date} is the same date as #{@end_date}. Please provide a start date that is before the end date.")
+    # unless @start_date.instance_of?(Date) && @end_date.instance_of?(Date)
+    #   raise ArgumentError.new("Hey that should be an instance of Date. start_date: #{start_date}, end_date: #{end_date}")
+    # end
+    
+    if (@start_date >= @end_date) 
+      raise ArgumentError.new("#{@start_date} needs to be before #{@end_date}.")
     end
     
-    # evaluates to 1 if @start_date is after @end_date
-    if (@start_date <=> @end_date) == 1
-      raise ArgumentError.new("#{@start_date} is after #{@end_date}. Please provide a start date that is before the end date.")
-    end
   end
   
   def length_of_stay
@@ -24,8 +24,7 @@ class DateRange
   
   # (!) add in a date range 
   def contains_date?(date)
-    parsed_date = Date.parse(date)
-    return parsed_date >= @start_date && parsed_date <= @end_date
+    return date >= @start_date && date <= @end_date
   end
   
   
