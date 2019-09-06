@@ -20,11 +20,14 @@ class Room
   end 
   
   # I'm going to need to run the test (is there overlap?)
-  def make_reservation(date_range)
-    @reservation_list.push(date_range) 
+  def make_reservation(proposed_date_range)
+    # reservation_list.each do |existing_date_range|
+    # date_range_overlaps?(existing_date_range, proposed_date_range)
+    @reservation_list.push(proposed_date_range) 
   end
   
-  
+  # need to refactor this
+  # does true/false make semantic sense here?
   def date_range_overlaps?(existing_date_range, proposed_date_range)
     if existing_date_range.start_date <= proposed_date_range.start_date && existing_date_range.end_date >= proposed_date_range.end_date
       return false
