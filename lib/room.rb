@@ -26,8 +26,12 @@ class Room
     @reservation_list.push(proposed_date_range) 
   end
   
-  # need to refactor this
-  # does true/false make semantic sense here?
+  def reservation_exists?(date)
+    @reservation_list.each do |reservation|
+      return reservation.contains_date?(date)
+    end
+  end
+  
   def date_range_overlaps?(existing_date_range, proposed_date_range)
     if existing_date_range.start_date <= proposed_date_range.start_date && existing_date_range.end_date >= proposed_date_range.end_date
       return false
@@ -45,11 +49,3 @@ class Room
   end
 end
 
-# # this is a method to test if a room is available on a particular date
-# def room_available_on_date?(particular_date)
-#   @reservation_list.each do |reservation|
-#     if reservation.contains_date?(particular_date)
-#       return room
-#     end
-#   end
-# end

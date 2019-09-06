@@ -19,8 +19,7 @@ describe "Room" do
   let(:long_date_range_edge_starts_before) { DateRange.new(Date.new(2009,12,04), Date.new(2010,01,14)) }
   let(:long_date_range_edge_starts_within_extends_after) { DateRange.new(Date.new(2009,12,06), Date.new(2010,01,17)) }
   let(:within_long_date_range){ DateRange.new(Date.new(2009,12,06), Date.new(2009,12,07)) }
-  let(:room_with_reservation) { Room.new(2) }
-  
+  # let(:room_with_reservation) { Room.new(2) }
   let(:particular_date_within_short_range){ Date.new(2001,02,03) }
   let(:particular_date_out_of_short_range) { Date.new(2001,02,01) }
   
@@ -59,7 +58,7 @@ describe "Room" do
     end
   end
   
-  describe "make-reservation" do
+  describe "make-reservation and reservation_exists?" do
     it "should accurately return an array of DateRange instances once a reservation is made" do
       expect(room.reservation_list).must_be_instance_of Array
       
@@ -68,7 +67,7 @@ describe "Room" do
       expect(room.reservation_list.length).must_equal 1
       expect(room.reservation_list.first).must_be_instance_of DateRange
       
-      # make a secod reservation for the same room
+      # make a second reservation for the same room
       room.make_reservation(long_date_range)
       expect(room.reservation_list.length).must_equal 2
       expect(room.reservation_list.last).must_be_instance_of DateRange
@@ -79,7 +78,17 @@ describe "Room" do
       expect(room_high_id.reservation_list.length).must_equal 1
       expect(room_high_id.reservation_list.last).must_be_instance_of DateRange
     end
+    # test for reservation_exists?(date)
+    it "should return true when a date is passed within the reservation range" do
+      in_range_date = Date.new(2009,12,05)
+      out_of_range_date = Date.new(2009,12,01)
+      room_high_id.make_reservation(long_date_range)
+      expect(room_high_id.reservation_exists?(in_range_date)).must_equal true
+      expect(room_high_id.reservation_exists?(out_of_range_date)).must_equal false
+    end
   end
+  
+  
   
   describe "date_range_overlaps?" do
     it "should return false when two date ranges overlap" do
@@ -108,5 +117,5 @@ describe "Room" do
     it "should return false when the proposed range spans an existing range " do
       expect(room.date_range_overlaps?(short_date_range,extraordinarily_long_date_range)).must_equal false
     end
-  end
+  end 
 end
