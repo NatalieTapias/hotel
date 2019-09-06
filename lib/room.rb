@@ -45,5 +45,8 @@ class Room
       return false
     end
   end
+  
+  def total_cost(date_range)
+    return @cost * date_range.length_of_stay
+  end
 end
-

@@ -33,8 +33,11 @@ describe "Hotel" do
       expect(a_hotel.list_of_reservations(a_date).first.id).must_equal 1  
       expect(a_hotel.list_of_reservations(a_date)[1].id).must_equal 2
       expect(a_hotel.list_of_reservations(a_date)[2].id).must_equal 3
+      expect(a_hotel.list_of_reservations(a_date).first).must_be_instance_of Room 
       
     end
   end
+  
+  # describe "list_of_available_rooms(date)"
   
 end

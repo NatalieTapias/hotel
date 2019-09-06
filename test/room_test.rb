@@ -1,6 +1,7 @@
 require_relative "test_helper.rb"
 require_relative "../lib/date_range.rb"
 
+
 describe "Room" do
   
   let(:room){ Room.new(2) }
@@ -19,7 +20,6 @@ describe "Room" do
   let(:long_date_range_edge_starts_before) { DateRange.new(Date.new(2009,12,04), Date.new(2010,01,14)) }
   let(:long_date_range_edge_starts_within_extends_after) { DateRange.new(Date.new(2009,12,06), Date.new(2010,01,17)) }
   let(:within_long_date_range){ DateRange.new(Date.new(2009,12,06), Date.new(2009,12,07)) }
-  # let(:room_with_reservation) { Room.new(2) }
   let(:particular_date_within_short_range){ Date.new(2001,02,03) }
   let(:particular_date_out_of_short_range) { Date.new(2001,02,01) }
   
@@ -98,34 +98,21 @@ describe "Room" do
     end
   end
   
-  
-  
-  describe "date_range_overlaps?" do
-    it "should return false when two date ranges overlap" do
-      expect(room.date_range_overlaps?(short_date_range,short_date_range_copy)).must_equal false
-    end
-    it "should return true for when start/end dates overlap from two date ranges (can check in on the date that a check-out occurs for a room)" do
-      expect(room.date_range_overlaps?(short_date_range,edge_date_range_check_in_when_other_check_out)).must_equal true
-      expect(room.date_range_overlaps?(short_date_range,edge_date_range_check_out_when_other_check_in)).must_equal true
-    end
-    # when date ranges are not intersecting, and occur either before or after existing date range
-    it "should return true for proposed date ranges that are significantly before/significantly after existing date range" do
-      expect(room.date_range_overlaps?(short_date_range,long_date_range)).must_equal true
-      expect(room.date_range_overlaps?(short_date_range,earlier_date_range)).must_equal true
-    end
-    # when one date is within range but extends out of range and (both sides)
-    it "should return false when any part of a range intersects with another range" do
-      expect(room.date_range_overlaps?(long_date_range,long_date_range_edge_starts_before)).must_equal false
-      expect(room.date_range_overlaps?(long_date_range,long_date_range_edge_starts_within_extends_after)).must_equal false
+  describe "total_cost" do 
+    short_start = Date.new(2001,02,03)
+    short_end = Date.new(2001,02,04)
+    long_start = Date.new(2009,12,05)
+    long_end = Date.new(2010,01,15)
+    let(:short_date_range){ DateRange.new(short_start, short_end) }
+    let(:long_date_range){ DateRange.new(long_start, long_end) }
+    
+    it "should accurately calculate the cost of a reservation when given a date range" do
+      room_high_id.make_reservation(long_date_range)
+      room_high_id.make_reservation(short_date_range)
+      expect(room_high_id.total_cost(long_date_range)).must_equal 8200
+      expect(room_high_id.total_cost(short_date_range)).must_equal 200
     end
     
-    # when within the range returns false
-    it "should return false when the proposed date range falls within the existing date range" do
-      expect(room.date_range_overlaps?(long_date_range,within_long_date_range)).must_equal false
-    end
-    
-    it "should return false when the proposed range spans an existing range " do
-      expect(room.date_range_overlaps?(short_date_range,extraordinarily_long_date_range)).must_equal false
-    end
-  end 
+  end
+  
 end
