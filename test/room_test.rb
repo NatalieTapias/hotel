@@ -15,6 +15,9 @@ describe "Room" do
   let(:edge_date_range_check_in_when_other_check_out){ DateRange.new(Date.new(2001,02,04), Date.new(2001,02,05))}
   let(:edge_date_range_check_out_when_other_check_in){ DateRange.new(Date.new(2001,02,01), Date.new(2001,02,03))}
   let(:long_date_range) { DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
+  let(:long_date_range_edge_starts_before) { DateRange.new(Date.new(2009,12,04), Date.new(2010,01,14)) }
+  let(:long_date_range_edge_starts_within_extends_after) { DateRange.new(Date.new(2009,12,06), Date.new(2010,01,17)) }
+  let(:within_long_date_range){ DateRange.new(Date.new(2009,12,06), Date.new(2009,12,07)) }
   let(:room_with_reservation) { Room.new(2) }
   
   let(:particular_date_within_short_range){ Date.new(2001,02,03) }
@@ -90,14 +93,15 @@ describe "Room" do
       expect(room.date_range_overlaps?(short_date_range,long_date_range)).must_equal true
       expect(room.date_range_overlaps?(short_date_range,earlier_date_range)).must_equal true
     end
+    # when one date is within range but extends out of range and (both sides)
+    it "should return false when any part of a range intersects with another range" do
+      expect(room.date_range_overlaps?(long_date_range,long_date_range_edge_starts_before)).must_equal false
+      expect(room.date_range_overlaps?(long_date_range,long_date_range_edge_starts_within_extends_after)).must_equal false
+    end
+    
+    # when within the range returns false
+    it "should return false when the proposed date range falls within the existing date range" do
+      expect(room.date_range_overlaps?(long_date_range,within_long_date_range)).must_equal false
+    end
   end
-  
 end
-
-# describe "room_available_on_date?" do
-#   it "returns an array of available Rooms" do
-#     room_with_reservation.make_reservation(short_date_range)
-#     expect(room_with_reservation.reservation_list).must_be_instance_of Array
-#     expect(room_with_reservation.room_available_on_date?(particular_date_out_of_short_range)).must_be_instance_of Room #room
-#   end
-# end

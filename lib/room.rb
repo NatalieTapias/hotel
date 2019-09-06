@@ -24,17 +24,18 @@ class Room
     @reservation_list.push(date_range) 
   end
   
-  # do I want this here or in hotel??
+  
   def date_range_overlaps?(existing_date_range, proposed_date_range)
-    # when date ranges intersect
     if existing_date_range.start_date <= proposed_date_range.start_date && existing_date_range.end_date >= proposed_date_range.end_date
       return false
-      # when date ranges are not intersecting, and occur either before or after existing date range
-    elsif existing_date_range.start_date > proposed_date_range.end_date || existing_date_range.end_date < proposed_date_range.start_date
+    elsif existing_date_range.start_date == proposed_date_range.end_date || existing_date_range.end_date == proposed_date_range.start_date 
       return true
-      #  (you can check in to a room when another person checks out of it and vice-versa)
-    elsif existing_date_range.start_date == proposed_date_range.end_date || existing_date_range.end_date == proposed_date_range.start_date
+    elsif existing_date_range.start_date >= proposed_date_range.end_date || existing_date_range.end_date <= proposed_date_range.start_date 
       return true
+    elsif existing_date_range.start_date <= proposed_date_range.start_date  && existing_date_range.end_date >= proposed_date_range.start_date 
+      return false
+    elsif existing_date_range.end_date >= proposed_date_range.end_date  && existing_date_range.start_date <= proposed_date_range.end_date 
+      return false
     end
   end
 end
