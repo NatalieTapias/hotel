@@ -13,7 +13,7 @@ class DateRange
     # end
     
     if (@start_date >= @end_date) 
-      raise ArgumentError.new("#{@start_date} needs to be before #{@end_date}.")
+      raise ArgumentError.new("start_date #{@start_date} needs to be before end_date#{@end_date}.")
     end
     
   end

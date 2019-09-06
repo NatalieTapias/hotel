@@ -3,10 +3,10 @@ require_relative "test_helper"
 
 describe "DateRange" do
   # change so that you require date parsing in the test (only accept date objects)
-  let(:three_feb){Date.parse("3rd Feb 2001")}
-  let(:four_feb){Date.parse("4th Feb 2001")}
-  let(:eight_dec){Date.parse("8th Dec 2019")}
-  let(:twenty_dec){Date.new(2019,12,20)}
+  let(:three_feb){ Date.new(2001,02,3) }
+  let(:four_feb){ Date.new(2001,02,4) }
+  let(:eight_dec){ Date.new(2019,12,8) }
+  let(:twenty_dec){ Date.new(2019,12,20) }
   let(:valid_dates) { DateRange.new(three_feb, four_feb) }
   let(:valid_dates_long_range) { DateRange.new(eight_dec, twenty_dec) }
   let(:invalid_dates) { DateRange.new("Natalie","George") }
@@ -23,8 +23,8 @@ describe "DateRange" do
     it "should accurately return instance of Date with .start_date" do
       expect(valid_dates.start_date).must_be_instance_of Date
       expect(valid_dates_long_range.start_date).must_be_instance_of Date
-      expect(valid_dates.start_date.year).must_equal 2001
-      expect(valid_dates.start_date.mon).must_equal 2
+      # expect(valid_dates.start_date.year).must_equal 2001
+      # expect(valid_dates.start_date.mon).must_equal 2
       expect(valid_dates_long_range.start_date.strftime('%d %b %Y')).must_equal "08 Dec 2019" 
     end
     
@@ -33,6 +33,7 @@ describe "DateRange" do
       expect(valid_dates_long_range.end_date).must_be_instance_of Date
       expect(valid_dates_long_range.end_date.year).must_equal 2019
       expect(valid_dates_long_range.end_date.mon).must_equal 12
+      # is this valid?
       expect(valid_dates.end_date.strftime('%d %b %Y')).must_equal "04 Feb 2001"
     end
     
@@ -60,9 +61,16 @@ describe "DateRange" do
   
   describe "contains_date?" do
     it "should accurately respond to contains_date?" do
-      # date within range - first
-      a_date = Date.new(2019,12,8)
-      expect(valid_dates_long_range.contains_date?(a_date)).must_equal true
+      within_range_date = Date.new(2019,12,16)
+      out_of_range_date = Date.new(2019,12,21)
+      last_day_date = Date.new(2019,12,20)
+      first_day_date = Date.new(2019,12,8)
+      expect(valid_dates_long_range.contains_date?(within_range_date)).must_equal true
+      expect(valid_dates_long_range.contains_date?(out_of_range_date)).must_equal false
+      expect(valid_dates_long_range.contains_date?(last_day_date)).must_equal true 
+      expect(valid_dates_long_range.contains_date?(first_day_date)).must_equal true 
+      
+      
       # date within range - last
       # expect(valid_dates_long_range.contains_date?("20th Dec 2019")).must_equal true
       # # date within range - middle
