@@ -10,6 +10,7 @@ describe "Room" do
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
   let(:short_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) }
+  let(:extraordinarily_long_date_range) { DateRange.new(Date.new(2001,01,03), Date.new(2001,03,04)) }
   let(:short_date_range_copy) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) } 
   let(:earlier_date_range) { DateRange.new(Date.new(1999,02,03), Date.new(1999,02,04)) }
   let(:edge_date_range_check_in_when_other_check_out){ DateRange.new(Date.new(2001,02,04), Date.new(2001,02,05))}
@@ -102,6 +103,10 @@ describe "Room" do
     # when within the range returns false
     it "should return false when the proposed date range falls within the existing date range" do
       expect(room.date_range_overlaps?(long_date_range,within_long_date_range)).must_equal false
+    end
+    
+    it "should return false when the proposed range spans an existing range " do
+      expect(room.date_range_overlaps?(short_date_range,extraordinarily_long_date_range)).must_equal false
     end
   end
 end

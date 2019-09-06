@@ -39,6 +39,8 @@ class Room
       return false
     elsif existing_date_range.end_date >= proposed_date_range.end_date  && existing_date_range.start_date <= proposed_date_range.end_date 
       return false
+    elsif existing_date_range.start_date > proposed_date_range.start_date && existing_date_range.end_date <= proposed_date_range.end_date
+      return false
     end
   end
 end
