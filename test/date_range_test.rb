@@ -2,7 +2,6 @@ require_relative "test_helper"
 
 
 describe "DateRange" do
-  # change so that you require date parsing in the test (only accept date objects)
   let(:three_feb){ Date.new(2001,02,3) }
   let(:four_feb){ Date.new(2001,02,4) }
   let(:eight_dec){ Date.new(2019,12,8) }
@@ -14,7 +13,7 @@ describe "DateRange" do
   let(:invalid_dates_start_before_end) { DateRange.new(Date.new(2001,02,04),Date.new(2001,02,02)) }
   let(:invalid_dates_start_equals_end) { DateRange.new(Date.new(2001,02,04),Date.new(2001,02,04)) }
   
-  describe "#initialize" do
+  describe "initialize" do
     it "should return an instance of DateRange" do
       expect(valid_dates).must_be_instance_of DateRange
       expect(valid_dates_long_range).must_be_instance_of DateRange
@@ -33,7 +32,6 @@ describe "DateRange" do
       expect(valid_dates_long_range.end_date).must_be_instance_of Date
       expect(valid_dates_long_range.end_date.year).must_equal 2019
       expect(valid_dates_long_range.end_date.mon).must_equal 12
-      # is this valid?
       expect(valid_dates.end_date.strftime('%d %b %Y')).must_equal "04 Feb 2001"
     end
     
@@ -65,21 +63,11 @@ describe "DateRange" do
       out_of_range_date = Date.new(2019,12,21)
       last_day_date = Date.new(2019,12,20)
       first_day_date = Date.new(2019,12,8)
+      
       expect(valid_dates_long_range.contains_date?(within_range_date)).must_equal true
       expect(valid_dates_long_range.contains_date?(out_of_range_date)).must_equal false
       expect(valid_dates_long_range.contains_date?(last_day_date)).must_equal true 
       expect(valid_dates_long_range.contains_date?(first_day_date)).must_equal true 
-      
-      
-      # date within range - last
-      # expect(valid_dates_long_range.contains_date?("20th Dec 2019")).must_equal true
-      # # date within range - middle
-      # expect(valid_dates_long_range.contains_date?("15th Dec 2019")).must_equal true
-      
-      # # date out of range - after
-      # expect(valid_dates_long_range.contains_date?("30th Jan 2020")).must_equal false
-      # # date out of range - before
-      # expect(valid_dates_long_range.contains_date?("22nd May 2018")).must_equal false
     end
   end
 end
