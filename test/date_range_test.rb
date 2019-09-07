@@ -5,8 +5,17 @@ describe "DateRange" do
   let(:valid_dates){ DateRange.new(Date.new(2001,02,3), Date.new(2001,02,4)) }
   let(:valid_dates_long_range){ DateRange.new(Date.new(2019,12,8), Date.new(2019,12,20)) }
   let(:intersecting_long_range){ DateRange.new(Date.new(2019,12,9), Date.new(2019,12,10))}
+  let(:check_in_on_checkout_day){ DateRange.new(Date.new(2019,12,20), Date.new(2020,1,1)) }
+  let(:check_out_on_checkin_day){ DateRange.new(Date.new(2019,12,4), Date.new(2019,12,8)) }
+  let(:end_date_within_range){ DateRange.new(Date.new(2019,12,4), Date.new(2019,12,20)) }
+  let(:start_date_within_range){ DateRange.new(Date.new(2019,12,9), Date.new(2019,12,31)) }
+  let(:range_spans_long_range){ DateRange.new(Date.new(2019,12,4), Date.new(2020,01,20)) }
+  let(:short_range_within_long_range){ DateRange.new(Date.new(2019,12,10), Date.new(2019,12,18)) }
+  let(:range_way_before){ DateRange.new(Date.new(2010,12,8), Date.new(2010,12,20)) }
+  let(:range_way_after){ DateRange.new(Date.new(2020,12,8), Date.new(2020,12,20)) }
   
   let(:invalid_dates) { DateRange.new("Natalie","George") }
+  
   
   let(:invalid_dates_start_before_end) { DateRange.new(Date.new(2001,02,04),Date.new(2001,02,02)) }
   let(:invalid_dates_start_equals_end) { DateRange.new(Date.new(2001,02,04),Date.new(2001,02,04)) }
@@ -71,7 +80,30 @@ describe "DateRange" do
   
   describe "date_range_overlaps?" do
     it "should return a boolean" do
-      expect(valid_dates_long_range.date_range_overlaps?(intersecting_long_range)).must_equal false
+      expect(valid_dates_long_range.date_range_overlaps?(intersecting_long_range)).must_equal true
+    end
+    it "should accurately return true to allow for checkin/checkout date overlap" do
+      expect(valid_dates_long_range.date_range_overlaps?(check_in_on_checkout_day)).must_equal false
+      expect(valid_dates_long_range.date_range_overlaps?(check_out_on_checkin_day)).must_equal false
+    end
+    it "should return true when there is an overlap" do
+      # range equals range
+      expect(valid_dates_long_range.date_range_overlaps?(valid_dates_long_range)).must_equal true
+      # end date within a range 
+      expect(valid_dates_long_range.date_range_overlaps?(end_date_within_range)).must_equal true
+      # start date within a range
+      expect(valid_dates_long_range.date_range_overlaps?(start_date_within_range)).must_equal true
+      # range encapsulates range
+      expect(valid_dates_long_range.date_range_overlaps?(range_spans_long_range)).must_equal true
+      # range is within other range
+      expect(valid_dates_long_range.date_range_overlaps?(short_range_within_long_range)).must_equal true
+    end
+    
+    it "should return false when a date range is significantly out of range (before or after)" do
+      expect(valid_dates_long_range.date_range_overlaps?(range_way_after)).must_equal false
+      expect(valid_dates_long_range.date_range_overlaps?(range_way_before)).must_equal false
+      
+      
     end
   end
 end
