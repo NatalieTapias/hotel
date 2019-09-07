@@ -13,7 +13,10 @@ describe "Room" do
   
   
   let(:short_date_range){ DateRange.new( Date.new(2001,02,03), Date.new(2001,02,04)) }
+  let(:short_overlaping_range){ DateRange.new( Date.new(2001,02,02), Date.new(2001,02,04)) }
   let(:long_date_range){ DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
+  let(:long_date_range_copy){ DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
+  
   
   
   describe "initialize" do
@@ -69,32 +72,21 @@ describe "Room" do
     end
     
     it "should not add a reservation for a date range that overlaps with an existing reservation" do
+      room_3.make_reservation(short_date_range)
+      expect{room_3.make_reservation(short_overlaping_range)}.must_raise StandardError
+      room_3.make_reservation(long_date_range)
+      expect{room_3.make_reservation(long_date_range_copy)}.must_raise StandardError
+      
     end
     
   end
   describe "total_cost" do 
-    
     it "should accurately calculate the total_cost of a given reservation" do
       expect(room.total_cost(short_date_range)).must_equal 200
     end
-    
   end
   
+  describe "reservation_exists?" do
+  end
   
 end
-
-
-
-
-# let(:short_date_range) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) }
-# let(:extraordinarily_long_date_range) { DateRange.new(Date.new(2001,01,03), Date.new(2001,03,04)) }
-# let(:short_date_range_copy) { DateRange.new(Date.new(2001,02,03), Date.new(2001,02,04)) } 
-# let(:earlier_date_range) { DateRange.new(Date.new(1999,02,03), Date.new(1999,02,04)) }
-# let(:edge_date_range_check_in_when_other_check_out){ DateRange.new(Date.new(2001,02,04), Date.new(2001,02,05))}
-# let(:edge_date_range_check_out_when_other_check_in){ DateRange.new(Date.new(2001,02,01), Date.new(2001,02,03))}
-# let(:long_date_range) { DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
-# let(:long_date_range_edge_starts_before) { DateRange.new(Date.new(2009,12,04), Date.new(2010,01,14)) }
-# let(:long_date_range_edge_starts_within_extends_after) { DateRange.new(Date.new(2009,12,06), Date.new(2010,01,17)) }
-# let(:within_long_date_range){ DateRange.new(Date.new(2009,12,06), Date.new(2009,12,07)) }
-# let(:particular_date_within_short_range){ Date.new(2001,02,03) }
-# let(:particular_date_out_of_short_range) { Date.new(2001,02,01) }

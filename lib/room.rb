@@ -35,14 +35,9 @@ class Room
     @reservation_list.push(date_range) 
   end
   
-  
   def reservation_exists?(date)
     @reservation_list.each do |reservation|
       return reservation.contains_date?(date)
     end
   end
-  
-  
-  
-  
 end
