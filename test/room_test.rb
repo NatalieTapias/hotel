@@ -87,6 +87,22 @@ describe "Room" do
   end
   
   describe "reservation_exists?" do
+    let(:room_4){ Room.new(4)}
+    let(:out_of_range){DateRange.new(Date.new(2008,12,05), Date.new(2009,01,15)) } 
+    it "should return a boolean" do
+      room_4.make_reservation(short_date_range)
+      room_4.make_reservation(long_date_range)
+      expect(room_4.reservation_exists?(long_date_range)).must_equal true
+      expect(room_4.reservation_exists?(out_of_range)).must_equal false
+    end
+    
+    it "should accurately determine whether a reservation already exists" do
+      room_4.make_reservation(short_date_range)
+      expect(room_4.reservation_exists?(short_date_range)).must_equal true
+    end
+    
   end
   
 end
+
+

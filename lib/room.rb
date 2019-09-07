@@ -35,9 +35,13 @@ class Room
     @reservation_list.push(date_range) 
   end
   
-  def reservation_exists?(date)
+  def reservation_exists?(date_range)
+    exists = false
     @reservation_list.each do |reservation|
-      return reservation.contains_date?(date)
+      if reservation.date_range_overlaps?(date_range)
+        exists = true
+      end
     end
+    return exists
   end
 end
