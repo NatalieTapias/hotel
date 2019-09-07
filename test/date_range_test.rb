@@ -2,12 +2,10 @@ require_relative "test_helper"
 
 
 describe "DateRange" do
-  let(:three_feb){ Date.new(2001,02,3) }
-  let(:four_feb){ Date.new(2001,02,4) }
-  let(:eight_dec){ Date.new(2019,12,8) }
-  let(:twenty_dec){ Date.new(2019,12,20) }
-  let(:valid_dates) { DateRange.new(three_feb, four_feb) }
-  let(:valid_dates_long_range) { DateRange.new(eight_dec, twenty_dec) }
+  let(:valid_dates){ DateRange.new(Date.new(2001,02,3), Date.new(2001,02,4)) }
+  let(:valid_dates_long_range){ DateRange.new(Date.new(2019,12,8), Date.new(2019,12,20)) }
+  let(:intersecting_long_range){ DateRange.new(Date.new(2019,12,9), Date.new(2019,12,10))}
+  
   let(:invalid_dates) { DateRange.new("Natalie","George") }
   
   let(:invalid_dates_start_before_end) { DateRange.new(Date.new(2001,02,04),Date.new(2001,02,02)) }
@@ -68,6 +66,12 @@ describe "DateRange" do
       expect(valid_dates_long_range.contains_date?(out_of_range_date)).must_equal false
       expect(valid_dates_long_range.contains_date?(last_day_date)).must_equal true 
       expect(valid_dates_long_range.contains_date?(first_day_date)).must_equal true 
+    end
+  end
+  
+  describe "date_range_overlaps?" do
+    it "should return a boolean" do
+      expect(valid_dates_long_range.date_range_overlaps?(intersecting_long_range)).must_equal false
     end
   end
 end

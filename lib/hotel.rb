@@ -10,6 +10,7 @@ class Hotel
       @rooms << Room.new(i + 1)
     end
   end
+
   
   #list of reservations for a given date
   
@@ -23,19 +24,17 @@ class Hotel
     return reserved_rooms
   end
   
-  #(! start here)
-  
-  def list_of_available_rooms(date_range)
-    unavailable_rooms = []
-    @rooms.each do |room|
-      room.reservation_list.each do |existing_reservation_date_range|
-        if !(room.date_range_overlaps?(existing_reservation_date_range,date_range))
-          unavailable_rooms << room
-        end
-      end
-    end
-    # rooms = @rooms
-    # available_rooms = unavailable_rooms.map{|room| rooms.pop(room) }
-    return unavailable_rooms
-  end
+  # def list_of_available_rooms(date_range)
+  #   unavailable_rooms = []
+  #   @rooms.each do |room|
+  #     (room.reservation_list).each do |existing_reservation_date_range|
+  #       if !(date_range_overlaps?(date_range,date_range))
+  #         unavailable_rooms << room
+  #       end
+  #     end
+  #   end
+  #   # rooms = @rooms
+  #   # available_rooms = unavailable_rooms.map{|room| rooms.pop(room) }
+  #   return unavailable_rooms
+  # end
 end

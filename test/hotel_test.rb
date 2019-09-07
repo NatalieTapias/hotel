@@ -12,15 +12,7 @@ describe "Hotel" do
       expect(a_hotel.rooms.length).must_equal 20
     end
   end
-  
-  # describe "available_room_list" do
-  #   early_date = Date.new(2019,07,01)
-  #   it "should return an array of available rooms" do
-  #     expect(a_hotel.available_room_list(early_date)).must_be_instance_of Array
-  #   end
-  # end
-  
-  
+
   describe "list_of_reservations" do
     let(:a_hotel){ Hotel.new }
     it "should return an array of rooms reserved on a particular date" do
@@ -38,24 +30,21 @@ describe "Hotel" do
     end
   end
   
-  describe "list_of_available_rooms" do
-    let(:a_hotel){ Hotel.new }
+  # describe "list_of_available_rooms" do
+  #   let(:a_hotel){ Hotel.new }
     
-    it "should return an array" do
-      date_range = DateRange.new(Date.new(2012,01,01),Date.new(2012,01,03))
-      a_hotel.rooms.first.make_reservation(date_range)
-      a_hotel.rooms[1].make_reservation(date_range)
-      a_hotel.rooms[2].make_reservation(date_range)
-      # a_date = Date.new(2012,01,02)
+  #   it "should return an array" do
+  #     date_range = DateRange.new(Date.new(2012,01,01),Date.new(2012,01,03))
+  #     a_hotel.rooms.first.make_reservation(date_range)
+  #     a_hotel.rooms[1].make_reservation(date_range)
+  #     a_hotel.rooms[2].make_reservation(date_range)
+  #     # a_date = Date.new(2012,01,02)
       
-      # expect(a_hotel.list_of_available_rooms(date_range)).must_be_instance_of Array
-      # expect(a_hotel.list_of_available_rooms(date_range).first).must_be_instance_of Room
-      # expect(a_hotel.list_of_available_rooms(date_range).first.id).must_equal 1
-      # expect(a_hotel.list_of_available_rooms(date_range).length).must_equal 3
-      
-      
-      
-    end
-  end
+  #     expect(a_hotel.list_of_available_rooms(date_range)).must_be_instance_of Array
+  #     expect(a_hotel.list_of_available_rooms(date_range).first).must_be_instance_of Room
+  #     expect(a_hotel.list_of_available_rooms(date_range).first.id).must_equal 1
+  #     expect(a_hotel.list_of_available_rooms(date_range).length).must_equal 3 
+  #   end
+  # end
   
 end

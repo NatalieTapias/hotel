@@ -22,5 +22,24 @@ class DateRange
     return date >= @start_date && date <= @end_date
   end
   
+  # also this needs a test  i'm not sure if this goes here or not 
+  def date_range_overlaps?(date_range)
+    # true = there is overlap
+    # false = there is no overlap (it's good! make a self!)
+    if self.start_date <= date_range.end_date && self.end_date <= date_range.end_date
+      return true
+    elsif date_range.start_date <= self.start_date && date_range.end_date >= self.end_date
+      return true
+    elsif date_range.start_date <= self.start_date && date_range.end_date >= self.end_date
+      return true
+    elsif date_range.start_date <= self.start_date && date_range.end_date >= self.end_date
+      return true
+    elsif self.start_date == date_range.end_date || self.end_date == date_range.start_date
+      return false
+    else 
+      return false
+    end
+  end
+  
   
 end
