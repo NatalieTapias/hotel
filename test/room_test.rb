@@ -2,13 +2,16 @@ require_relative "test_helper.rb"
 require_relative "../lib/date_range.rb"
 
 describe "Room" do
-  
-  let(:room){ Room.new(2) }
+  id = rand(1..20)
+  let(:room){ Room.new(id) }
+  let(:room_3){ Room.new(3)}
   let(:room_high_id) { Room.new(20) }
   let(:room_id_zero) { Room.new(0) }
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
   let(:room_invalid_id){ Room.new("hi") }
+  
+  let(:room_with_reservation){ Room.new(id)}
   
   describe "initialize" do
     it "should create an instance of Room" do
@@ -19,74 +22,36 @@ describe "Room" do
       expect{room_id_too_low}.must_raise ArgumentError
       expect{room_invalid_id}.wont_be_instance_of Room
     end
-    
-    it "should accurately return :id" do
-      expect(room.id).must_equal 2
-      expect(room_high_id.id).must_equal 20      
+    describe "id" do
+      it "should accurately return :id" do
+        expect(room.id).must_equal id
+        expect(room_high_id.id).must_equal 20      
+      end
+      
+      it "should raise ArgumentError when invalid :id provided" do
+        expect{room_id_too_high}.must_raise ArgumentError
+        expect{room_invalid_id}.must_raise ArgumentError
+        expect{room_id_too_low}.must_raise ArgumentError
+      end
     end
     
-    it "should raise ArgumentError when invalid :id provided" do
-      expect{room_id_too_high}.must_raise ArgumentError
-      expect{room_invalid_id}.must_raise ArgumentError
-      expect{room_id_too_low}.must_raise ArgumentError
+    describe "reservation_list" do
+      it "should initialize with an empty reservation_list Array" do
+        expect(room.reservation_list).must_be_empty
+        expect(room.reservation_list).must_be_instance_of Array
+        expect(room_high_id.reservation_list).must_be_empty
+        expect(room_high_id.reservation_list).must_be_instance_of Array
+      end
     end
     
-    it "should initialize with an empty reservation_list Array" do
-      expect(room.reservation_list).must_be_empty
-      expect(room.reservation_list).must_be_instance_of Array
-      expect(room_high_id.reservation_list).must_be_empty
-      expect(room_high_id.reservation_list).must_be_instance_of Array
+    describe "rate" do
+      it "should accurately store and return :rate" do
+        expect(room.rate).must_equal 200
+        expect(room_high_id.rate).must_equal 200
+      end
     end
   end
   
-  describe "rate" do
-    it "should accurately return :rate" do
-      expect(room.rate).must_equal 200
-      expect(room_high_id.rate).must_equal 200
-    end
-  end
-  
-  describe "make-reservation and reservation_exists?" do
-    it "should accurately return an array of DateRange instances once a reservation is made" do
-      expect(room.reservation_list).must_be_instance_of Array
-      
-      # make a reservation
-      # room.make_reservation(short_date_range)
-      # expect(room.reservation_list.length).must_equal 1
-      # expect(room.reservation_list.first).must_be_instance_of DateRange
-      
-      # make a second reservation for the same room
-      # room.make_reservation(long_date_range)
-      # expect(room.reservation_list.length).must_equal 2
-      # expect(room.reservation_list.last).must_be_instance_of DateRange
-      
-      # make a reservation for another room
-      # room_high_id.make_reservation(long_date_range)
-      # expect(room_high_id.reservation_list).must_be_instance_of Array
-      # expect(room_high_id.reservation_list.length).must_equal 1
-      # expect(room_high_id.reservation_list.last).must_be_instance_of DateRange
-    end
-    
-    
-    # test for reservation_exists?(date)
-    it "should return true when a date is passed within the reservation range" do
-      # in_range_date = Date.new(2009,12,05)
-      # out_of_range_date = Date.new(2009,12,01)
-      # room_high_id.make_reservation(long_date_range)
-      # expect(room_high_id.reservation_exists?(in_range_date)).must_equal true
-      # expect(room_high_id.reservation_exists?(out_of_range_date)).must_equal false
-    end
-    
-    it "should return true when a date is passed within the reservation range" do
-      # make two reservations, first will have a match, second will not have a match
-      # in_range_date = Date.new(2009,12,05)
-      # out_of_range_date = Date.new(2009,12,01)
-      # room_high_id.make_reservation(long_date_range)
-      # room_high_id.make_reservation(short_date_range)
-      # expect(room_high_id.reservation_exists?(in_range_date)).must_equal true
-      # expect(room_high_id.reservation_exists?(out_of_range_date)).must_equal false
-    end
-  end
   
   describe "total_cost" do 
     short_start = Date.new(2001,02,03)
@@ -96,7 +61,7 @@ describe "Room" do
     let(:short_date_range){ DateRange.new(short_start, short_end) }
     let(:long_date_range){ DateRange.new(long_start, long_end) }
     
-    it "should accurately calculate the total_cost of a reservation when given a date range" do
+    it "should accurately calculate the total_cost of a given reservation" do
       room_high_id.make_reservation(long_date_range)
       room_high_id.make_reservation(short_date_range)
       expect(room_high_id.total_cost(long_date_range)).must_equal 8200

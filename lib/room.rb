@@ -11,6 +11,7 @@ class Room
     @reservation_list = []
   end
   
+  # this may be unnecessary
   def incorrect_id?(given_id)
     if given_id.class != Integer
       raise ArgumentError.new("#{given_id} is not an Integer")
@@ -18,6 +19,10 @@ class Room
       raise ArgumentError.new("#{given_id} is out of range. It needs to be between 1-12.")
     end
   end 
+  
+  def total_cost(date_range)
+    return @rate * date_range.length_of_stay
+  end
   
   # I'm going to need to run the test (is there overlap?)
   def make_reservation(date_range)
@@ -37,9 +42,7 @@ class Room
     end
   end
   
-  def total_cost(date_range)
-    return @rate * date_range.length_of_stay
-  end
+  
   
   
 end
