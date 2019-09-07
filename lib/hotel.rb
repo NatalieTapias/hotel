@@ -10,20 +10,19 @@ class Hotel
       @rooms << Room.new(i + 1)
     end
   end
-
   
-  #list of reservations for a given date
+  # def list_of_reservations(date)
+  #   reserved_rooms = []
+  #   @rooms.each do |room|
+  #     if room.reservation_exists?(date)
+  #       reserved_rooms << room
+  #     end
+  #   end
+  #   return reserved_rooms
+  # end
   
-  def list_of_reservations(date)
-    reserved_rooms = []
-    @rooms.each do |room|
-      if room.reservation_exists?(date)
-        reserved_rooms << room
-      end
-    end
-    return reserved_rooms
+  def make_a_reservation(date_range)
   end
-  
   # def list_of_available_rooms(date_range)
   #   unavailable_rooms = []
   #   @rooms.each do |room|

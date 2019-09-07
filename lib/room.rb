@@ -2,12 +2,12 @@ require_relative "date_range"
 
 
 class Room
-  attr_reader :id, :cost, :reservation_list
+  attr_reader :id, :rate, :reservation_list
   
   def initialize(id)
     incorrect_id?(id)
     @id = id
-    @cost = 200.00
+    @rate = 200.00
     @reservation_list = []
   end
   
@@ -20,10 +20,16 @@ class Room
   end 
   
   # I'm going to need to run the test (is there overlap?)
-  def make_reservation(proposed_date_range)
-    # if reservation doesn't already exist, do this, make a reservation
-    @reservation_list.push(proposed_date_range) 
+  def make_reservation(date_range)
+    self.reservation_list.each do |reservation|
+      if reservation.date_range_overlaps?(date_range)
+        raise StandardError.new("You can't reserve room ##{self.id} for the dates #{date_range.start_date} through #{date_range.end_date}. Please ")
+      end
+    end
+  else
+    @reservation_list.push(date_range) 
   end
+  
   
   def reservation_exists?(date)
     @reservation_list.each do |reservation|
@@ -32,7 +38,7 @@ class Room
   end
   
   def total_cost(date_range)
-    return @cost * date_range.length_of_stay
+    return @rate * date_range.length_of_stay
   end
   
   
