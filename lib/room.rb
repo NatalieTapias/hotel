@@ -24,15 +24,13 @@ class Room
     return @rate * date_range.length_of_stay
   end
   
-  # I'm going to need to run the test (is there overlap?)
+  
   def make_reservation(date_range)
-    self.reservation_list.each do |reservation|
-      if reservation.date_range_overlaps?(date_range)
-        raise StandardError.new("You can't reserve room ##{self.id} for the dates #{date_range.start_date} through #{date_range.end_date}. Please ")
-      end
+    if reservation_exists?(date_range)
+      raise StandardError.new("You can't reserve room ##{self.id} for the dates #{date_range.start_date} through #{date_range.end_date}. Please try another room.")
+    else
+      @reservation_list.push(date_range) 
     end
-  else
-    @reservation_list.push(date_range) 
   end
   
   def reservation_exists?(date_range)

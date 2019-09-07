@@ -103,7 +103,6 @@ describe "Room" do
       expect(room_4.reservation_exists?(short_date_range)).must_equal true
       expect(room_4.reservation_exists?(checks_in_as_short_date_range_ends)).must_equal false
       expect(room_4.reservation_exists?(checks_out_as_short_date_range_begins)).must_equal false
-      
     end
     
   end
