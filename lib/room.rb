@@ -11,7 +11,7 @@ class Room
     @reservation_list = []
   end
   
-  # this may be unnecessary
+  # this may be unnecessary?
   def incorrect_id?(given_id)
     if given_id.class != Integer
       raise ArgumentError.new("#{given_id} is not an Integer")

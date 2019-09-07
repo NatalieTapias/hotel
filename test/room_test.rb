@@ -4,14 +4,17 @@ require_relative "../lib/date_range.rb"
 describe "Room" do
   id = rand(1..20)
   let(:room){ Room.new(id) }
-  let(:room_3){ Room.new(3)}
+  
   let(:room_high_id) { Room.new(20) }
   let(:room_id_zero) { Room.new(0) }
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
   let(:room_invalid_id){ Room.new("hi") }
   
-  let(:room_with_reservation){ Room.new(id)}
+  
+  let(:short_date_range){ DateRange.new( Date.new(2001,02,03), Date.new(2001,02,04)) }
+  let(:long_date_range){ DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
+  
   
   describe "initialize" do
     it "should create an instance of Room" do
@@ -52,23 +55,31 @@ describe "Room" do
     end
   end
   
-  
-  describe "total_cost" do 
-    short_start = Date.new(2001,02,03)
-    short_end = Date.new(2001,02,04)
-    long_start = Date.new(2009,12,05)
-    long_end = Date.new(2010,01,15)
-    let(:short_date_range){ DateRange.new(short_start, short_end) }
-    let(:long_date_range){ DateRange.new(long_start, long_end) }
+  describe "make_reservation" do
+    let(:room_3){ Room.new(3)}
+    it "should instantiate with 0 reservations" do
+      expect(room_3.reservation_list).must_be_empty
+    end
     
-    it "should accurately calculate the total_cost of a given reservation" do
-      room_high_id.make_reservation(long_date_range)
-      room_high_id.make_reservation(short_date_range)
-      expect(room_high_id.total_cost(long_date_range)).must_equal 8200
-      expect(room_high_id.total_cost(short_date_range)).must_equal 200
+    it "should add DateRange objects to reservation_list when make_reservation is caled" do
+      room_3.make_reservation(short_date_range)
+      expect(room_3.reservation_list.length).must_equal 1
+      room_3.make_reservation(long_date_range)
+      expect(room_3.reservation_list.length).must_equal 2
+    end
+    
+    it "should not add a reservation for a date range that overlaps with an existing reservation" do
     end
     
   end
+  describe "total_cost" do 
+    
+    it "should accurately calculate the total_cost of a given reservation" do
+      expect(room.total_cost(short_date_range)).must_equal 200
+    end
+    
+  end
+  
   
 end
 
