@@ -64,20 +64,6 @@ describe "DateRange" do
     end 
   end
   
-  describe "contains_date?" do
-    it "should accurately respond to contains_date?" do
-      within_range_date = Date.new(2019,12,16)
-      out_of_range_date = Date.new(2019,12,21)
-      last_day_date = Date.new(2019,12,20)
-      first_day_date = Date.new(2019,12,8)
-      
-      expect(valid_dates_long_range.contains_date?(within_range_date)).must_equal true
-      expect(valid_dates_long_range.contains_date?(out_of_range_date)).must_equal false
-      expect(valid_dates_long_range.contains_date?(last_day_date)).must_equal true 
-      expect(valid_dates_long_range.contains_date?(first_day_date)).must_equal true 
-    end
-  end
-  
   describe "date_range_overlaps?" do
     it "should return a boolean" do
       expect(valid_dates_long_range.date_range_overlaps?(intersecting_long_range)).must_equal true

@@ -17,12 +17,6 @@ class DateRange
     return (@end_date - @start_date).to_i
   end
   
-  # (!) add in a date range 
-  def contains_date?(date)
-    return date >= @start_date && date <= @end_date
-  end
-  
-  
   def date_range_overlaps?(date_range)
     # true = there is overlap
     # false = there is no overlap (it's good! make a self!)
