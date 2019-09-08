@@ -4,20 +4,15 @@ require_relative "../lib/date_range.rb"
 describe "Room" do
   id = rand(1..20)
   let(:room){ Room.new(id) }
-  
   let(:room_high_id) { Room.new(20) }
   let(:room_id_zero) { Room.new(0) }
   let(:room_id_too_high) { Room.new(30) }
   let(:room_id_too_low) { Room.new(-30) }
   let(:room_invalid_id){ Room.new("hi") }
-  
-  
   let(:short_date_range){ DateRange.new( Date.new(2001,02,03), Date.new(2001,02,04)) }
   let(:short_overlaping_range){ DateRange.new( Date.new(2001,02,02), Date.new(2001,02,04)) }
   let(:long_date_range){ DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
   let(:long_date_range_copy){ DateRange.new(Date.new(2009,12,05), Date.new(2010,01,15)) }
-  
-  
   
   describe "initialize" do
     it "should create an instance of Room" do
@@ -76,7 +71,6 @@ describe "Room" do
       expect{room_3.make_reservation(short_overlaping_range)}.must_raise StandardError
       room_3.make_reservation(long_date_range)
       expect{room_3.make_reservation(long_date_range_copy)}.must_raise StandardError
-      
     end
     
   end
@@ -104,9 +98,7 @@ describe "Room" do
       expect(room_4.reservation_exists?(checks_in_as_short_date_range_ends)).must_equal false
       expect(room_4.reservation_exists?(checks_out_as_short_date_range_begins)).must_equal false
     end
-    
   end
-  
 end
 
 

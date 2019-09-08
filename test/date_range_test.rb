@@ -88,8 +88,6 @@ describe "DateRange" do
     it "should return false when a date range is significantly out of range (before or after)" do
       expect(valid_dates_long_range.date_range_overlaps?(range_way_after)).must_equal false
       expect(valid_dates_long_range.date_range_overlaps?(range_way_before)).must_equal false
-      
-      
     end
   end
 end
