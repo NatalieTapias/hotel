@@ -22,20 +22,30 @@ class Hotel
     end
     room.make_reservation(date_range)
   end
+  
+  
+  
+  def list_of_reservations(date_range)
+    reserved_rooms = []
+    @rooms.each do |room|
+      if room.reservation_exists?(date_range)
+        reserved_rooms << room
+      end
+    end
+    return reserved_rooms
+  end
+  
+  
+  
+  def list_of_available_rooms(date_range)
+    unavailable_rooms = self.list_of_reservations(date_range)
+    available_rooms = @rooms
+    unavailable_rooms.each do |room| 
+      available_rooms.delete(room)
+    end
+    return available_rooms
+  end
 end
-
-
-def list_of_reservations(date_range)
-  #   reserved_rooms = []
-  #   @rooms.each do |room|
-  #     if room.reservation_exists?(date)
-  #       reserved_rooms << room
-  #     end
-  #   end
-  #   return reserved_rooms
-end
-
-# def list_of_available_rooms(date_range)
 #   unavailable_rooms = []
 #   @rooms.each do |room|
 #     (room.reservation_list).each do |existing_reservation_date_range|
