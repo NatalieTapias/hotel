@@ -16,7 +16,6 @@ class Hotel
   def make_reservation(date_range)
     i = 0
     room = @rooms[i]
-    
     while room.reservation_exists?(date_range)
       i += 1
       room = @rooms[i]
@@ -26,15 +25,15 @@ class Hotel
 end
 
 
-# def list_of_reservations(date)
-#   reserved_rooms = []
-#   @rooms.each do |room|
-#     if room.reservation_exists?(date)
-#       reserved_rooms << room
-#     end
-#   end
-#   return reserved_rooms
-# end
+def list_of_reservations(date_range)
+  #   reserved_rooms = []
+  #   @rooms.each do |room|
+  #     if room.reservation_exists?(date)
+  #       reserved_rooms << room
+  #     end
+  #   end
+  #   return reserved_rooms
+end
 
 # def list_of_available_rooms(date_range)
 #   unavailable_rooms = []

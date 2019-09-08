@@ -17,13 +17,13 @@ describe "Hotel" do
     end
   end
   
-  describe "make_a_reservation" do
-    it "takes a date range and creates a reservation, if possible" do
+  describe "make_reservation" do
+    it "should make a reservation when all rooms are available" do
       a_hotel.make_reservation(short_range)
       expect(a_hotel.rooms.first.reservation_exists?(short_range)).must_equal true
     end
     
-    it "makes a reservation when no reservations exist for a given date range" do
+    it "should raise StandardError when all rooms unavailable" do
       20.times do
         a_hotel.make_reservation(short_range)
       end
@@ -32,8 +32,24 @@ describe "Hotel" do
       end
       # expect an error if I try to make a reservation for the 21st time
       expect{a_hotel.make_reservation(short_range)}.must_raise StandardError
+    end
+    
+    it "should make a reservation when all but one room are unavailable" do
+      20.times do |i|
+        expect(a_hotel.rooms[i].reservation_list).must_be_instance_of Array
+      end
+      19.times do
+        a_hotel.make_reservation(short_range)
+      end
       
     end
+  end
+  
+  describe "list of reservations" do
+    
+    it "should return an array of Rooms" do 
+    end
+    
   end
 end
 
