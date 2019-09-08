@@ -42,6 +42,9 @@ describe "Hotel" do
         a_hotel.make_reservation(short_range)
       end
       
+      a_hotel.make_reservation(short_range)
+      expect(a_hotel.rooms.last.reservation_list.first).must_equal short_range
+      
     end
   end
   
