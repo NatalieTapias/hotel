@@ -24,7 +24,6 @@ class Room
     return @rate * date_range.length_of_stay
   end
   
-  
   def make_reservation(date_range)
     if reservation_exists?(date_range)
       raise StandardError.new("You can't reserve room ##{self.id} for the dates #{date_range.start_date} through #{date_range.end_date}. Please try another room.")
