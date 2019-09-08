@@ -1,0 +1,4 @@
+
+- consider using modules as namespaces 
+- think about how to create a block within a hotel
+- consider changing DateRange to reservation, rather than storing within an array in Room

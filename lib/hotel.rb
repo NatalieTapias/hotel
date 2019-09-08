@@ -11,8 +11,6 @@ class Hotel
     end
   end
   
-  
-  
   def make_reservation(date_range)
     i = 0
     room = @rooms[i]
@@ -23,8 +21,6 @@ class Hotel
     room.make_reservation(date_range)
   end
   
-  
-  
   def list_of_reservations(date_range)
     reserved_rooms = []
     @rooms.each do |room|
@@ -34,8 +30,6 @@ class Hotel
     end
     return reserved_rooms
   end
-  
-  
   
   def list_of_available_rooms(date_range)
     unavailable_rooms = self.list_of_reservations(date_range)

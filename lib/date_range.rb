@@ -19,7 +19,7 @@ class DateRange
   
   def date_range_overlaps?(date_range)
     # true = there is overlap
-    # false = there is no overlap (it's good! make a self!)
+    # false = there is no overlap (it's good!)
     if self.start_date == date_range.end_date || self.end_date == date_range.start_date
       return false
     elsif self.start_date >= date_range.start_date && date_range.end_date > self.start_date
