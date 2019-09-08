@@ -19,13 +19,20 @@ describe "Hotel" do
   
   describe "make_a_reservation" do
     it "takes a date range and creates a reservation, if possible" do
-      a_hotel.make_a_reservation(short_range)
+      a_hotel.make_reservation(short_range)
       expect(a_hotel.rooms.first.reservation_exists?(short_range)).must_equal true
     end
     
     it "makes a reservation when no reservations exist for a given date range" do
-      20.times do ||
+      20.times do
+        a_hotel.make_reservation(short_range)
       end
+      20.times do |i|
+        expect(a_hotel.rooms[i].reservation_exists?(short_range)).must_equal true
+      end
+      # expect an error if I try to make a reservation for the 21st time
+      expect{a_hotel.make_reservation(short_range)}.must_raise StandardError
+      
     end
   end
 end

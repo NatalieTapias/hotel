@@ -13,7 +13,7 @@ class Hotel
   
   
   
-  def make_a_reservation(date_range)
+  def make_reservation(date_range)
     i = 0
     room = @rooms[i]
     
@@ -21,7 +21,6 @@ class Hotel
       i += 1
       room = @rooms[i]
     end
-    
     room.make_reservation(date_range)
   end
 end
