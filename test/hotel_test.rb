@@ -5,8 +5,6 @@ describe "Hotel" do
   let(:a_hotel){ Hotel.new }
   let(:short_range){ DateRange.new(Date.new(2001,02,3), Date.new(2001,02,4)) }
   
-  
-  
   describe "initialize" do
     it "should store a list of 20 Rooms in an array" do
       expect(a_hotel.rooms).must_be_instance_of Array
@@ -64,6 +62,8 @@ describe "Hotel" do
       end
       expect(a_hotel.list_of_reservations(short_range).first).must_be_instance_of Room
       expect((a_hotel.list_of_reservations(short_range).first).reservation_exists?(short_range)).must_equal true
+      # this confirms that none of the rooms in the hotel are available on that particular daterange
+      expect(a_hotel.list_of_available_rooms(short_range)).must_be_empty  
     end
   end
   

@@ -77,6 +77,7 @@ describe "Room" do
   describe "total_cost" do 
     it "should accurately calculate the total_cost of a given reservation" do
       expect(room.total_cost(short_date_range)).must_equal 200
+      expect(room.total_cost(long_date_range)).must_equal 8200
     end
   end
   

@@ -37,3 +37,26 @@ Which implementation better adheres to the single responsibility principle?
 B
 Bonus question once you've read Metz ch. 3: Which implementation is more loosely coupled?
 B
+
+
+* * *
+In my implementation I had three classes: Hotel, Date_Range, and Room.  
+What is this class's responsibility? You should be able to describe it in a single sentence. Is this class responsible for exactly one thing?
+Hotel: Hotel is responsible for hodling a collection of 20 rooms, making reservations, providing a list of reservations, and a list of available rooms. In general, I'd say Hotel is responseible for high level reservation-type activities.
+DateRange: DateRange is responsible for knowing a start and end date, validating whether they are valid (end is afer start), whether two instances of itself overlap, and how to calculate the total length of stay. Date range is responsible for date-range activities.
+Room: Room is responsible for knowing its ID, Rate, and list of Reservations, which allows it to have the following behaviors: make_reservation(date_range), total_cost(date_range), reservation_exists?(date_range). Room is responsible for room-related activities.
+
+
+
+Does this class take on any responsibility that should be delegated to "lower level" classes?
+I don't see an opportunity here to move any responsibilities to "lower level" classes here. I do see an opportunity to format my tests. 
+
+Is there code in other classes that directly manipulates this class's instance variables?
+No
+
+You might recall writing a file called refactor.txt. Take a look at the refactor plans that you wrote, and consider the following:
+
+How easy is it to follow your own instructions?
+Do these refactors improve the clarity of your code? I could have done a better job with refactors.txt
+Do you still agree with your previous assesment, or could your refactor be further improved? 
+Describe in design-activity.md what changes you would need to make to improve this design, and how the resulting design would be an improvement.
